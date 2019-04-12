@@ -7,12 +7,13 @@
 //
 
 import UIKit
+import CoreData
 
 class InputView: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     
     @IBOutlet weak var spentLabel: UILabel!
     var totalSpending : Int = 0
-    var lastSpend : Int = 0
+//    var lastSpend : Int = 0
     let spendValuesBase : [Int] = [1,2,3,4,5,6,7,8,9,10,15,20,25,30,40,50,60,70,80,90,100]
     let multiplier : Int = 1
     let currencySymbol : String = "£"
@@ -26,7 +27,7 @@ class InputView: UIViewController, UICollectionViewDelegate, UICollectionViewDat
             return spendValues.map {String("\(currencySymbol)\($0)")}
         }
     }
-    var spendLabelText : String {
+    var spentLabelText : String {
         get {
             return ("Today I spent about: \(currencySymbol)\(totalSpending)")
         }
@@ -34,7 +35,8 @@ class InputView: UIViewController, UICollectionViewDelegate, UICollectionViewDat
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -57,10 +59,72 @@ class InputView: UIViewController, UICollectionViewDelegate, UICollectionViewDat
 
         }
         let thisSpend = spendValues[indexPath.item]
-        totalSpending += thisSpend
-        lastSpend = thisSpend
+       
+        
+        var itemArray : [Item] = []
+       // var total : Int64 = 0
+        
+        let calendar = Calendar.current
+
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        
+        print("fetching items into array")
+        let todayStartOfDay = calendar.startOfDay(for: Date())
+        let todayStaryOfDayPredicate = NSPredicate(format: "date = %@", todayStartOfDay as NSDate)
+
+        let request : NSFetchRequest<Item> = Item.fetchRequest()
+        request.predicate = todayStaryOfDayPredicate
+
+        do{
+            itemArray = try context.fetch(request)
+        }
+        catch{
+            print ("context fetch error \(error)")
+            return
+        }
+        
+        print ("fetched array\(itemArray)")
+        
+        if itemArray.isEmpty {
+            print("array is empty")
+            let newItem = Item(context: context )
+            newItem.date = calendar.startOfDay(for: Date())
+            newItem.total = 0
+            itemArray.append(newItem)
+            print("added \(newItem)")
+        }
+        else {
+            print ("array is not empty")
+        }
+        
+        
+        
+        print("current total \(itemArray[0].total)")
+        
+        
+        
+        print("increment item")
+        itemArray[0].total += Int64(thisSpend)
+        
+        print("new total \(itemArray[0].total)")
+
+        
+        print("save new value")
+        
+        do {
+            try context.save()
+        }
+        catch {
+            print ("context save error \(error)")
+        }
+        
+        totalSpending = Int(itemArray[0].total)
+//        lastSpend = thisSpend
         //print(totalSpending)
-        spentLabel.text = spendLabelText
+        spentLabel.text = spentLabelText
+        
     }
 }
+
+
 
