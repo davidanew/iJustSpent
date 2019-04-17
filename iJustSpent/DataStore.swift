@@ -7,10 +7,30 @@
 //
 
 import Foundation
+import RxSwift
 
 
-class DataStore: DataStoreProtocol {
+//class DataStore: DataStoreProtocol {
+
+class DataStore  {
     
+    var totalSpending = BehaviorSubject<Int>(value: 0)
+    
+    func addspend(thisSpend: Int) {
+        do {
+            let total = try totalSpending.value()
+            totalSpending.onNext(total + thisSpend)
+            
+        }
+        catch {
+            print ("error")
+            return
+        }
+    }
+    
+
+
+
    /*
     
     

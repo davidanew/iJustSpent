@@ -12,30 +12,21 @@ import RxSwift
 import RxCocoa
 
 
-protocol DataStoreProtocol {
-    /*
-    var spending: Int { get }
-    func addSpend (spend: Int)
- */
-}
+//class InputView: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+class InputView: UIViewController {
 
-class InputView: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+    
     
     @IBOutlet weak var spentLabel: UILabel!
-//    var totalSpending = PublishSubject<String>()
-    var totalSpending = BehaviorSubject<String>(value: "zero")
-    //var buttonPushedSubject = PublishSubject<Int>()
-
+    @IBOutlet weak var inputCollectionView: UICollectionView!
     
-//    var lastSpend : Int = 0
     let spendValuesBase : [Int] = [1,2,3,4,5,6,7,8,9,10,15,20,25,30,40,50,60,70,80,90,100]
     //TODO: Put these values in user defaults
     let multiplier : Int = 1
     let currencySymbol : String = "£"
     
-    
-    let dataStore = DataStore() as DataStoreProtocol
-    
+ //   let dataStore = DataStore() as DataStoreProtocol
+    let dataStore = DataStore()
     
     var spendValues : [Int] {
         get {
@@ -47,39 +38,58 @@ class InputView: UIViewController, UICollectionViewDelegate, UICollectionViewDat
             return spendValues.map {String("\(currencySymbol)\($0)")}
         }
     }
-    
-    var spentLabelText : String {
-        get {
-            
-            //totalSpending = dataStore.spending
-            return ("Today I spent about: \(currencySymbol)\(totalSpending)")
-        }
-    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        //set label to current total
-        //spentLabel.text = spentLabelText
-        _ = totalSpending.bind(to: spentLabel.rx.text)
-        //buttonPushedSubject.onNext(1)
-        totalSpending.onNext("one")
-        totalSpending.onNext("two")
-
+        _ = dataStore.totalSpending.map{"Today I spent about: \(self.currencySymbol)\($0)"}.bind(to: spentLabel.rx.text)
         
-        do {
-            let x = try totalSpending.value()
-            print (x)
-
-
-        }
-        catch {
-            print ("error")
-            return
+        /*
+        let items = Observable.just(
+            (0..<20).map{ "Test \($0)" }
+        )
+ */
+ 
+        
+        let spendLablesObs = Observable.just(spendLabels)
+        
+        _ = spendLablesObs.asObservable().bind(to: self.inputCollectionView.rx.items(cellIdentifier: "cell" , cellType: InputCell.self)) { row, data, cell in
+            //cell.label.text = "hello"
+            //cell.label.text = self.spendLabels[row]
+            cell.label.text = data
         }
         
 
+        
+        _ = inputCollectionView.rx.itemSelected.subscribe(onNext: { (indexPath) in
+            let cell = self.inputCollectionView.cellForItem(at: indexPath)
+            cell?.backgroundColor = UIColor.green
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                cell?.backgroundColor = UIColor.red
+                
+            }
+            let thisSpend = self.spendValues[indexPath.item]
+            self.dataStore.addspend(thisSpend: thisSpend)
+
+        })
+        
+        /*
+        _ = spendLablesObs.asObservable().bind(to: self.inputCollectionView.rx.items(cellIdentifier: "cell" , cellType: InputCell.self), curriedArgument: { row, data, cell in
+            //cell.label.text = "hello"
+            //cell.label.text = self.spendLabels[row]
+            cell.label.text = data
+        })
+ */
+        
+      
+        
+        /*
+        items.asObservable().bindTo(self.collectionView.rx.items(cellIdentifier: cell.reuseIdentifier, cellType: CustomCollectionViewCell.self)) { row, data, cell in
+            cell.data = data
+            }
+ */
     }
     
+    /*
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return spendLabels.count
     }
@@ -90,7 +100,10 @@ class InputView: UIViewController, UICollectionViewDelegate, UICollectionViewDat
         cell.label.text = spendLabels[indexPath.item]
         return cell
     }
+ */
     
+    /*
+ 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         //    let cell = collectionView.cellForItemAtIndexPath(indexPath) as! MyCell
         let cell = collectionView.cellForItem(at: indexPath)
@@ -100,9 +113,8 @@ class InputView: UIViewController, UICollectionViewDelegate, UICollectionViewDat
 
         }
         let thisSpend = spendValues[indexPath.item]
-        _ = thisSpend
-       
-        
+        dataStore.addspend(thisSpend: thisSpend)
+
         /*
         
         var itemArray : [Item] = []
@@ -179,6 +191,7 @@ class InputView: UIViewController, UICollectionViewDelegate, UICollectionViewDat
  
  
     }
+ */
 }
 
 
