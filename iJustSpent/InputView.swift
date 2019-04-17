@@ -1,34 +1,22 @@
-//
-//  ViewController.swift
-//  iJustSpent
-//
-//  Created by David New on 09/04/2019.
+
 //  Copyright © 2019 David New. All rights reserved.
-//
 
 import UIKit
-import CoreData
+//import CoreData
 import RxSwift
 import RxCocoa
 
-
-//class InputView: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
 class InputView: UIViewController {
-
-    
     
     @IBOutlet weak var spentLabel: UILabel!
     @IBOutlet weak var inputCollectionView: UICollectionView!
     
-    let spendValuesBase : [Int] = [1,2,3,4,5,6,7,8,9,10,15,20,25,30,40,50,60,70,80,90,100]
+    let spendValuesBase : [Int64] = [1,2,3,4,5,6,7,8,9,10,15,20,25,30,40,50,60,70,80,90,100]
     //TODO: Put these values in user defaults
-    let multiplier : Int = 1
+    let multiplier : Int64 = 1
     let currencySymbol : String = "£"
-    
- //   let dataStore = DataStore() as DataStoreProtocol
     let dataStore = DataStore()
-    
-    var spendValues : [Int] {
+    var spendValues : [Int64] {
         get {
             return spendValuesBase.map {$0 * multiplier}
         }
@@ -43,13 +31,6 @@ class InputView: UIViewController {
         super.viewDidLoad()
         _ = dataStore.totalSpending.map{"Today I spent about: \(self.currencySymbol)\($0)"}.bind(to: spentLabel.rx.text)
         
-        /*
-        let items = Observable.just(
-            (0..<20).map{ "Test \($0)" }
-        )
- */
- 
-        
         let spendLablesObs = Observable.just(spendLabels)
         
         _ = spendLablesObs.asObservable().bind(to: self.inputCollectionView.rx.items(cellIdentifier: "cell" , cellType: InputCell.self)) { row, data, cell in
@@ -57,50 +38,19 @@ class InputView: UIViewController {
             //cell.label.text = self.spendLabels[row]
             cell.label.text = data
         }
-        
-
-        
         _ = inputCollectionView.rx.itemSelected.subscribe(onNext: { (indexPath) in
             let cell = self.inputCollectionView.cellForItem(at: indexPath)
             cell?.backgroundColor = UIColor.green
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 cell?.backgroundColor = UIColor.red
-                
             }
             let thisSpend = self.spendValues[indexPath.item]
             self.dataStore.addspend(thisSpend: thisSpend)
+        })
+    }
+    
+   
 
-        })
-        
-        /*
-        _ = spendLablesObs.asObservable().bind(to: self.inputCollectionView.rx.items(cellIdentifier: "cell" , cellType: InputCell.self), curriedArgument: { row, data, cell in
-            //cell.label.text = "hello"
-            //cell.label.text = self.spendLabels[row]
-            cell.label.text = data
-        })
- */
-        
-      
-        
-        /*
-        items.asObservable().bindTo(self.collectionView.rx.items(cellIdentifier: cell.reuseIdentifier, cellType: CustomCollectionViewCell.self)) { row, data, cell in
-            cell.data = data
-            }
- */
-    }
-    
-    /*
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return spendLabels.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        //TODO: look at !
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! InputCell
-        cell.label.text = spendLabels[indexPath.item]
-        return cell
-    }
- */
     
     /*
  
