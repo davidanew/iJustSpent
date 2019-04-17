@@ -1,0 +1,6 @@
+framework module Pods_iJustSpent {
+  umbrella header "Pods-iJustSpent-umbrella.h"
+
+  export *
+  module * { export * }
+}
