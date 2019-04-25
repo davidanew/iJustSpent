@@ -1,4 +1,3 @@
-
 //  Copyright © 2019 David New. All rights reserved.
 
 import Foundation
@@ -13,7 +12,7 @@ class DataStore  {
     //Context for core data
     private let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     //Store total in observable so view can pick it up asynconously
-    var totalSpending = BehaviorSubject<Int64>(value: 0)
+    var totalSpendingOutput = BehaviorSubject<Int64>(value: 0)
     
     //TODO: This should throw if empty
     func addspend(thisSpend: Int64) {
@@ -24,7 +23,7 @@ class DataStore  {
             //Add this spending
             itemArray[0].total += thisSpend
             //Send new total
-            totalSpending.onNext(itemArray[0].total)
+            totalSpendingOutput.onNext(itemArray[0].total)
         }
         //Save new data back to core data
         saveData()
@@ -36,7 +35,7 @@ class DataStore  {
         //data should never be empty
         if !itemArray.isEmpty {
             //Send the total spending
-            totalSpending.onNext(itemArray[0].total)
+            totalSpendingOutput.onNext(itemArray[0].total)
         }
         else {
             print ("problem getting data on init")
@@ -50,7 +49,7 @@ class DataStore  {
     //mabe this one should be get todays data
     //or get data passing in date
     private func getData() {
-        print("fetching items into array")
+        //print("fetching items into array")
         //We need the time for today to index the spending
         //Use the start of the day
         let todayStartOfDay = calendar.startOfDay(for: Date())
@@ -62,30 +61,30 @@ class DataStore  {
         do{
             //Try and retrieve data for today
             itemArray = try context.fetch(request)
-            print ("fetched array\(itemArray)")
+            //print ("fetched array\(itemArray)")
             if itemArray.isEmpty {
                 //If there is no data for today we need to create a new entry
-                print("array is empty")
+                //print("array is empty")
                 let newItem = Item(context: context )
                 newItem.date = calendar.startOfDay(for: Date())
                 newItem.total = 0
                 itemArray.append(newItem)
-                print("added \(newItem)")
+                //print("added \(newItem)")
             }
             else {
                 // array is not empty, dont need to do anything
                 //TODO: Maybe remove this else section
-                print ("array is not empty, dont need to do anything")
+                //print ("array is not empty, dont need to do anything")
             }
         }
         catch{
-            print ("context fetch error \(error)")
+            //print ("context fetch error \(error)")
         }
     }
     
     //TODO: This should throw
     private func saveData () {
-        print("save new value")
+        //print("save new value")
         do {
             // save data in itemArray
             try context.save()
