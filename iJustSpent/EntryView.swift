@@ -4,7 +4,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class InputView: UIViewController {
+class EntryView: UIViewController {
     
     let disposeBag = DisposeBag()
     //Label to show running total
@@ -12,7 +12,7 @@ class InputView: UIViewController {
     //Collection view showing input spend options
     @IBOutlet weak var inputCollectionView: UICollectionView!
     //Controller
-    let controller = InputController()
+    let controller = EntryController()
 
     override func viewDidLoad() {
         super.viewDidLoad()

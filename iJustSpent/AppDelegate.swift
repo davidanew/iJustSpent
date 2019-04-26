@@ -35,7 +35,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if let viewController = tabBarController.selectedViewController as? HistoryView {
             viewController.controller.send()
         }
-        if let viewController = tabBarController.selectedViewController as? InputView {
+        if let viewController = tabBarController.selectedViewController as? EntryView {
             viewController.controller.send()
         }
     }
@@ -65,7 +65,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if let viewController = tabBarController.selectedViewController as? HistoryView {
             viewController.controller.send()
         }
-        if let viewController = tabBarController.selectedViewController as? InputView {
+        if let viewController = tabBarController.selectedViewController as? EntryView {
             viewController.controller.send()
         }
     }

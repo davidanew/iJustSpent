@@ -4,7 +4,7 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-class InputController {
+class EntryController {
     
     private let disposeBag = DisposeBag()
     //Output that sends text for the spending for today
@@ -23,6 +23,7 @@ class InputController {
     //Handles storing and updating of the spending
     private let dataStore = DataStore()
     //Calculate spend options as a number
+    /*
     private var spendValues : [TotalType] {
         return spendValuesBase.map {$0 * multiplier}
     }
@@ -30,19 +31,26 @@ class InputController {
     private var spendLabels : [String] {
         return spendValues.map {String("\(currencySymbol)\($0)")}
     }
+ */
     //Init used to set up bindings
     init(){
         //Send spend to datastore
-        spentLabelSelectedInput.map{self.spendValues[$0]}.bind(to: dataStore.newSpendInput).disposed(by: disposeBag)
+        spentLabelSelectedInput.map{
+            self.spendValuesBase[$0]*self.multiplier
+            }.bind(to: dataStore.newSpendInput).disposed(by: disposeBag)
         //Bind changes in totalspending to update spentLabel
-        dataStore.todaysSpendingOutput.map{"Today I spent about: \(self.currencySymbol)\($0)"}.bind(to: spentLabelTextOutput).disposed(by: disposeBag)
+        dataStore.todaysSpendingOutput.map{
+            "Today I spent about: \(self.currencySymbol)\($0)"
+            }.bind(to: spentLabelTextOutput).disposed(by: disposeBag)
     }
     //Data requested
     func send() {
         //Request datastore to send todays spending
         dataStore.sendTodaysSpending()
         //Display collection view of the spend options
-        Observable.just(spendLabels).bind(to: collectionViewArrayOutput).disposed(by: disposeBag)
+        Observable.just(self.spendValuesBase.map{
+            "\(self.currencySymbol)\($0*self.multiplier)"
+        }).bind(to: collectionViewArrayOutput).disposed(by: disposeBag)
     }
 }
 
