@@ -11,23 +11,24 @@ import RxSwift
 import RxCocoa
 
 class HistoryView: UIViewController {
-    
-    @IBOutlet weak var historyTableView: UITableView!
     private let disposeBag = DisposeBag()
+    //Table view of all spending
+    @IBOutlet weak var historyTableView: UITableView!
+    //Controller for this view
     let controller = HistoryController()
-
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        //Bind history data from controller to table view, including data formatting
         controller.historyDataOutput.bind(to: historyTableView.rx.items(cellIdentifier: "Cell")) { row, model, cell in
             cell.textLabel?.text = "\(model.date)"
             cell.detailTextLabel?.text = "\(model.total)"
             }.disposed(by: disposeBag)
-        
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        //Ask controller to send data
         controller.send()
     }
   

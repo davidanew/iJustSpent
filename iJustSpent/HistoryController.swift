@@ -11,19 +11,17 @@ import RxSwift
 import RxCocoa
 
 class HistoryController {
-    
     private let disposeBag = DisposeBag()
+    //Handles core data and adding new values
     private var dataStore = DataStore()
+    //data that is sent back to the view
     let historyDataOutput = PublishSubject<[DateAndTotal]>()
-    
+    //bind datastore output to the view
     init (){
         dataStore.allSpendingOutput.bind(to: historyDataOutput).disposed(by: disposeBag)
     }
-    
     func send() {
+        // request data from datastore
         dataStore.sendAllSpending()
     }
-    
-    
-    
 }

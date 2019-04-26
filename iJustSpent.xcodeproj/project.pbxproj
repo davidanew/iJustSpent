@@ -10,6 +10,7 @@
 		1C4A6A970960BC2659C2657B /* Pods_iJustSpentTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F645F351F5020195871A071E /* Pods_iJustSpentTests.framework */; };
 		A6F55F5600921EF643EF8413 /* Pods_iJustSpent.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D46B9BC8C36E9180704B3026 /* Pods_iJustSpent.framework */; };
 		C863C24422733AFD00A6555E /* HistoryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C863C24322733AFD00A6555E /* HistoryController.swift */; };
+		C863C24822738AAD00A6555E /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = C863C24722738AAD00A6555E /* Errors.swift */; };
 		C894F3132271EA5800D357CF /* InputController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C894F3122271EA5700D357CF /* InputController.swift */; };
 		C897BE072266301300296B1F /* Notes.rtf in Resources */ = {isa = PBXBuildFile; fileRef = C897BE062266301300296B1F /* Notes.rtf */; };
 		C897BE0922663B9700296B1F /* DataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = C897BE0822663B9700296B1F /* DataStore.swift */; };
@@ -46,6 +47,7 @@
 		4E0EA09423C1C847343D7310 /* Pods-iJustSpentTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iJustSpentTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-iJustSpentTests/Pods-iJustSpentTests.release.xcconfig"; sourceTree = "<group>"; };
 		8177AE74647544BC6F1DAB7F /* Pods-iJustSpent.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iJustSpent.release.xcconfig"; path = "Pods/Target Support Files/Pods-iJustSpent/Pods-iJustSpent.release.xcconfig"; sourceTree = "<group>"; };
 		C863C24322733AFD00A6555E /* HistoryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryController.swift; sourceTree = "<group>"; };
+		C863C24722738AAD00A6555E /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		C894F3112270B92F00D357CF /* RxSwiftPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = RxSwiftPlayground.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		C894F3122271EA5700D357CF /* InputController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputController.swift; sourceTree = "<group>"; };
 		C897BE062266301300296B1F /* Notes.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = Notes.rtf; sourceTree = "<group>"; };
@@ -146,6 +148,7 @@
 			children = (
 				C894F3112270B92F00D357CF /* RxSwiftPlayground.playground */,
 				C8E4D85C225CC48B00C69682 /* AppDelegate.swift */,
+				C863C24722738AAD00A6555E /* Errors.swift */,
 				C8E4D85E225CC48B00C69682 /* InputView.swift */,
 				C894F3122271EA5700D357CF /* InputController.swift */,
 				C897BE0822663B9700296B1F /* DataStore.swift */,
@@ -418,6 +421,7 @@
 				C897BE0922663B9700296B1F /* DataStore.swift in Sources */,
 				C863C24422733AFD00A6555E /* HistoryController.swift in Sources */,
 				C8E4D85D225CC48B00C69682 /* AppDelegate.swift in Sources */,
+				C863C24822738AAD00A6555E /* Errors.swift in Sources */,
 				C894F3132271EA5800D357CF /* InputController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -24,8 +24,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     @objc func significantTimeChangeNotification() {
         //Posted when there is a significant change in time, for example, change to a new day (midnight), carrier time update, and change to or from daylight savings time.
-        os_log("significantTimeChangeNotification")
+        //os_log("significantTimeChangeNotification")
         //same code as below, could make function
+        //request updated data for visible view controller
+
         guard let tabBarController = self.window?.rootViewController as? UITabBarController else {
             return
         }
@@ -56,11 +58,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
         //print("applicationDidBecomeActive")
         
-        
+        //request updated data for visible view controller
         guard let tabBarController = self.window?.rootViewController as? UITabBarController else {
             return
         }
-        //print(tabBarController.selectedViewController)
         if let viewController = tabBarController.selectedViewController as? HistoryView {
             viewController.controller.send()
         }
