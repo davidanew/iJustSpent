@@ -36,15 +36,26 @@ class InputController {
         }
     }
     
-    func doBindings() {
+    
+    init(){
         //Bind changes in totalspending to update spentLabel
         //
-        dataStore.totalSpendingOutput.map{"Today I spent about: \(self.currencySymbol)\($0)"}.bind(to: spentLabelTextOutput).disposed(by: disposeBag)
+        dataStore.todaysSpendingOutput.map{"Today I spent about: \(self.currencySymbol)\($0)"}.bind(to: spentLabelTextOutput).disposed(by: disposeBag)
+        
+        //
+        //spentLabelSelectedInput.subscribe(onNext: {self.dataStore.addspend(thisSpend: self.spendValues[$0])}).disposed(by: disposeBag)
+        spentLabelSelectedInput.map{self.spendValues[$0]}.bind(to: dataStore.newSpendInput).disposed(by: disposeBag)
+        
+    }
+    
+    func send() {
+        
+        dataStore.sendTodaysSpending()
+        //dataStore.startAllSpending()
+        
         //Display collection view of the spend options
         //
         Observable.just(spendLabels).bind(to: collectionViewArrayOutput).disposed(by: disposeBag)
-        //
-        spentLabelSelectedInput.subscribe(onNext: {self.dataStore.addspend(thisSpend: self.spendValues[$0])}).disposed(by: disposeBag)
     }
 }
 

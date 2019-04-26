@@ -35,6 +35,7 @@ secondaryBehaviorSubject.onNext(3)
 primaryBehaviorSubject.onNext(1000)
 */
 
+/*
 let obs : Observable<Int> = Observable.empty()
 
 let theSubject = PublishSubject<Int>()
@@ -43,6 +44,9 @@ let theSubject = PublishSubject<Int>()
 theSubject.subscribe(onNext: {print ($0)})
 
 Observable.of(2,2).bind(to: theSubject)
+*/
+
+[1,2].map{print ($0)}
 
 
 

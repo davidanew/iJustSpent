@@ -26,14 +26,14 @@ class InputView: UIViewController {
             //Flash cell to show selection
             //TODO: should go to main thread
             cell?.backgroundColor = UIColor.green
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                 cell?.backgroundColor = UIColor.red
             }
         }).disposed(by: disposeBag)
         //
         inputCollectionView.rx.itemSelected.map{indexPath -> Int in return indexPath.item}.bind(to: controller.spentLabelSelectedInput).disposed(by: disposeBag)
         //
-        controller.doBindings()
+        controller.send()
     }
 }
 
