@@ -22,23 +22,13 @@ class EntryController {
     private let currencySymbol : String = "£"
     //Handles storing and updating of the spending
     private let dataStore = DataStore()
-    //Calculate spend options as a number
-    /*
-    private var spendValues : [TotalType] {
-        return spendValuesBase.map {$0 * multiplier}
-    }
-    //spend options as string
-    private var spendLabels : [String] {
-        return spendValues.map {String("\(currencySymbol)\($0)")}
-    }
- */
     //Init used to set up bindings
     init(){
-        //Send spend to datastore
+        //Send any spend entries to datastore
         spentLabelSelectedInput.map{
             self.spendValuesBase[$0]*self.multiplier
             }.bind(to: dataStore.newSpendInput).disposed(by: disposeBag)
-        //Bind changes in totalspending to update spentLabel
+        //Bind changes in totalspending from datastore to update spentLabel
         dataStore.todaysSpendingOutput.map{
             "Today I spent about: \(self.currencySymbol)\($0)"
             }.bind(to: spentLabelTextOutput).disposed(by: disposeBag)
