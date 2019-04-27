@@ -20,9 +20,9 @@ class HistoryView: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         //Bind history data from controller to table view, including data formatting
-        controller.historyDataOutput.bind(to: historyTableView.rx.items(cellIdentifier: "Cell")) { row, model, cell in
-            cell.textLabel?.text = "\(model.date)"
-            cell.detailTextLabel?.text = "\(model.total)"
+        controller.historyDataOutput.bind(to: historyTableView.rx.items(cellIdentifier: "HistoryTableViewCellIdentifier", cellType: HistoryTableViewCell2.self)) { row, model, cell in
+            cell.date.text = "\(model.date)"
+            cell.spending.text = "\(model.total)"
             }.disposed(by: disposeBag)
     }
     

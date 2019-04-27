@@ -28,7 +28,7 @@ class dataStoreTests: XCTestCase {
 
         //dataStore.spendingAllOutput.subscribe(onNext: {dateAndTotalArray in dateAndTotalArray.m\print (dateAndTotalArray)})
         dataStore.allSpendingOutput.subscribe(onNext: {(dateAndTotalArray : [DateAndTotal]) in
-            dateAndTotalArray.map{ (dateAndTotal : DateAndTotal) in
+            _ = dateAndTotalArray.map{ (dateAndTotal : DateAndTotal) in
                 print("Date: \(dateAndTotal.date)  Total: \(dateAndTotal.total)")
             }
         }).disposed(by: disposeBag)

@@ -12,10 +12,15 @@ import RxCocoa
 
 struct HistoryTableInput {
     var date : String
-    var total : TotalType
+    var total : String
 }
 
 class HistoryController {
+    
+    //TODO user defaults
+    private let currencySymbol : String = "£"
+
+    
     private let disposeBag = DisposeBag()
     //Handles core data and adding new values
     private var dataStore = DataStore()
@@ -35,7 +40,7 @@ class HistoryController {
             return (input1.date > input2.date)
         })
         let historyTableInputArray = dateAndTotalArraySorted.map{ (dateAndTotal : DateAndTotal) -> HistoryTableInput in
-            HistoryTableInput(date: self.dateToText(dateAndTotal.date), total: dateAndTotal.total)
+            HistoryTableInput(date: self.dateToText(dateAndTotal.date), total: "\(currencySymbol)\(dateAndTotal.total)")
         }
         return historyTableInputArray
     }
