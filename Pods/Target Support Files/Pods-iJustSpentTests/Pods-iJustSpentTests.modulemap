@@ -1,0 +1,6 @@
+framework module Pods_iJustSpentTests {
+  umbrella header "Pods-iJustSpentTests-umbrella.h"
+
+  export *
+  module * { export * }
+}

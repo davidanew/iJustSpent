@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1020"
+   LastUpgradeVersion = "0930"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "8A425B47675DB234D880852BF1D4C943"
-               BuildableName = "RxSwift.framework"
-               BlueprintName = "RxSwift"
+               BlueprintIdentifier = "9FE1359745D40878B451C746EC563134"
+               BuildableName = "RxCocoa.framework"
+               BlueprintName = "RxCocoa-iOS12.2"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -45,9 +45,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "8A425B47675DB234D880852BF1D4C943"
-            BuildableName = "RxSwift.framework"
-            BlueprintName = "RxSwift"
+            BlueprintIdentifier = "9FE1359745D40878B451C746EC563134"
+            BuildableName = "RxCocoa.framework"
+            BlueprintName = "RxCocoa-iOS12.2"
             ReferencedContainer = "container:Pods.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
