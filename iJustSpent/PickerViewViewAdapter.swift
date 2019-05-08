@@ -48,17 +48,14 @@ class PickerViewViewAdapter
             label.textColor = UIColor.white
         }
  */
-        else if ["1","2","3"] .contains(label.text) {
+        else if ["1","2","3","4","5","6","7","8","9"] .contains(label.text) {
             label.backgroundColor = UIColor.darkGray
             label.textColor = UIColor.white
         }
-        else if ["4","5","6"] .contains(label.text){
-            label.backgroundColor = UIColor.lightGray
-            label.textColor = UIColor.black
-        }
         else {
-            label.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1)
-            label.textColor = UIColor.white
+            label.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
+            label.textColor = UIColor.black
+
             
         }
         

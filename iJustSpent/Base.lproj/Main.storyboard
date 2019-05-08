@@ -181,10 +181,10 @@
             </objects>
             <point key="canvasLocation" x="820" y="1440"/>
         </scene>
-        <!--Item-->
+        <!--Combined-->
         <scene sceneID="dw0-ns-pGy">
             <objects>
-                <viewController id="nYC-kJ-Wpc" customClass="CombinedViewController" customModule="iJustSpent" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="nYC-kJ-Wpc" userLabel="Combined" customClass="CombinedViewController" customModule="iJustSpent" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ZBG-Kk-KiP">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -306,8 +306,44 @@
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="m7k-5W-QLr">
-                                <rect key="frame" x="0.0" y="316" width="375" height="302"/>
+                                <rect key="frame" x="0.0" y="331" width="375" height="287"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CombinedCell" id="CYx-S9-XUC" customClass="CombinedTableViewCell" customModule="iJustSpent" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="CYx-S9-XUC" id="ZGY-uz-kTe">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="left" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bdo-JK-ylc">
+                                                    <rect key="frame" x="15" y="12" width="42" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="right" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gk2-tR-GKc">
+                                                    <rect key="frame" x="318" y="12" width="42" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="bdo-JK-ylc" firstAttribute="leading" secondItem="ZGY-uz-kTe" secondAttribute="leadingMargin" constant="-1" id="GN8-fF-k9u"/>
+                                                <constraint firstItem="Gk2-tR-GKc" firstAttribute="centerY" secondItem="ZGY-uz-kTe" secondAttribute="centerY" id="d8r-gX-Fof"/>
+                                                <constraint firstItem="Gk2-tR-GKc" firstAttribute="bottom" secondItem="ZGY-uz-kTe" secondAttribute="bottomMargin" id="nCz-xR-TyT"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="Gk2-tR-GKc" secondAttribute="trailing" constant="-1" id="nmd-fn-j1C"/>
+                                                <constraint firstItem="Gk2-tR-GKc" firstAttribute="firstBaseline" secondItem="bdo-JK-ylc" secondAttribute="firstBaseline" id="rhs-tA-81N"/>
+                                                <constraint firstItem="Gk2-tR-GKc" firstAttribute="baseline" secondItem="bdo-JK-ylc" secondAttribute="baseline" id="ruB-cP-0uc"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="date" destination="bdo-JK-ylc" id="qNK-tn-kDJ"/>
+                                            <outlet property="spending" destination="Gk2-tR-GKc" id="yyw-Np-DIO"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
                             </tableView>
                         </subviews>
                         <constraints>
@@ -316,7 +352,7 @@
                             <constraint firstItem="Wkt-uW-Us2" firstAttribute="top" secondItem="P4W-9W-C6U" secondAttribute="top" id="e8I-Dx-TmQ"/>
                             <constraint firstItem="Wkt-uW-Us2" firstAttribute="leading" secondItem="ZBG-Kk-KiP" secondAttribute="leading" id="gbh-dT-6B9"/>
                             <constraint firstItem="m7k-5W-QLr" firstAttribute="trailing" secondItem="P4W-9W-C6U" secondAttribute="trailing" id="m3u-PK-ijP"/>
-                            <constraint firstItem="m7k-5W-QLr" firstAttribute="top" secondItem="Wkt-uW-Us2" secondAttribute="bottom" id="m9i-CV-9pX"/>
+                            <constraint firstItem="m7k-5W-QLr" firstAttribute="top" secondItem="Wkt-uW-Us2" secondAttribute="bottom" constant="15" id="m9i-CV-9pX"/>
                             <constraint firstItem="m7k-5W-QLr" firstAttribute="leading" secondItem="P4W-9W-C6U" secondAttribute="leading" id="yOU-hS-9YJ"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="P4W-9W-C6U"/>
@@ -331,6 +367,7 @@
                         <outlet property="entryPicker5" destination="r4n-Nd-yn5" id="7e1-z2-bcb"/>
                         <outlet property="entryPicker6" destination="isb-Xf-iYt" id="Dh5-1o-hdd"/>
                         <outlet property="entryPicker7" destination="bqm-VV-NmX" id="Wkl-U6-cDq"/>
+                        <outlet property="historyTableView" destination="m7k-5W-QLr" id="Ita-sa-C4d"/>
                         <outlet property="segControl" destination="T8g-hh-5FR" id="fih-5r-pfd"/>
                     </connections>
                 </viewController>

@@ -22,8 +22,11 @@ class CombinedViewController: UIViewController {
     @IBOutlet weak var entryPicker6: UIPickerView!
     @IBOutlet weak var entryPicker7: UIPickerView!
     @IBOutlet weak var botButton: UIButton!
+    @IBOutlet weak var historyTableView: UITableView!
     
     let disposeBag = DisposeBag()
+    
+    let controller = HistoryController()
 
     
     override func viewDidLoad() {
@@ -34,10 +37,10 @@ class CombinedViewController: UIViewController {
         //topButton.
         
         segControl.backgroundColor = .clear
-        segControl.tintColor = UIColor(red: 1, green: 0.8, blue: 0, alpha: 1)
+        segControl.tintColor = UIColor(red: 1, green: 0.7, blue: 0, alpha: 1)
         
     //   botButton.backgroundColor = .clear
-        botButton.backgroundColor = UIColor(red: 1, green: 0.8, blue: 0, alpha: 1)
+        botButton.backgroundColor = UIColor(red: 1, green: 0.7, blue: 0, alpha: 1)
         // topButton.layer.cornerRadius = 5
         botButton.layer.cornerRadius = 5
 
@@ -116,8 +119,31 @@ class CombinedViewController: UIViewController {
  
  */
         
+        controller.historyDataOutput.bind(to: historyTableView.rx.items(cellIdentifier: "CombinedCell", cellType: CombinedTableViewCell.self)) { row, model, cell in
+            cell.date.text = "\(model.date)"
+            cell.spending.text = "\(model.total)"
+            cell.layer.cornerRadius = 5
+            cell.layer.masksToBounds = true
+            //cell.backgroundColor = UIColor(red: 1, green: 0.7, blue: 0, alpha: 1)
+            cell.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0.8)
+
+            cell.tintColor = UIColor.black
+            cell.layer.borderWidth = 2
+            cell.layer.borderColor = UIColor.black.cgColor
+            }.disposed(by: disposeBag)
+        
+//        Observable.just([HistoryTableInput(date: "today", total: "25")])
+        
+  
+        
     }
     
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        //Ask controller to send data
+        controller.send()
+    }
 
     /*
     // MARK: - Navigation
