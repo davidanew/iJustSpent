@@ -9,7 +9,7 @@
 import UIKit
 import RxSwift
 import RxCocoa
-
+import os.log
 
 class CombinedViewController: UIViewController {
  //   @IBOutlet weak var topButton: UIButton!
@@ -25,68 +25,17 @@ class CombinedViewController: UIViewController {
     @IBOutlet weak var historyTableView: UITableView!
     
     let disposeBag = DisposeBag()
-    
-    let controller = HistoryController()
-
+    //let controller = HistoryController()
+    let spendStore = SpendStore()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
-        
-        //topButton.
-        
         segControl.backgroundColor = .clear
         segControl.tintColor = UIColor(red: 1, green: 0.7, blue: 0, alpha: 1)
-        
-    //   botButton.backgroundColor = .clear
         botButton.backgroundColor = UIColor(red: 1, green: 0.7, blue: 0, alpha: 1)
-        // topButton.layer.cornerRadius = 5
         botButton.layer.cornerRadius = 5
-
-//        botButton.layer.borderWidth = 2
-//        botButton.layer.borderColor = UIColor.red.cgColor
-        
         botButton.setTitleColor(UIColor.black, for:UIControlState.normal)
-        
-        
-        
-        
-        
-    /*
-        
-        entryPicker2.layer.borderColor = UIColor.darkGray.cgColor
-        entryPicker2.layer.borderWidth = 1.0
-        entryPicker2.layer.cornerRadius = 7.0
-        entryPicker2.layer.masksToBounds = true
-        
-        entryPicker3.layer.borderColor = UIColor.darkGray.cgColor
-        entryPicker3.layer.borderWidth = 1.0
-        entryPicker3.layer.cornerRadius = 7.0
-        entryPicker3.layer.masksToBounds = true
-        
-        entryPicker4.layer.borderColor = UIColor.darkGray.cgColor
-        entryPicker4.layer.borderWidth = 1.0
-        entryPicker4.layer.cornerRadius = 7.0
-        entryPicker4.layer.masksToBounds = true
-        
-        entryPicker6.layer.borderColor = UIColor.darkGray.cgColor
-        entryPicker6.layer.borderWidth = 1.0
-        entryPicker6.layer.cornerRadius = 7.0
-        entryPicker6.layer.masksToBounds = true
-        
-        entryPicker7.layer.borderColor = UIColor.darkGray.cgColor
-        entryPicker7.layer.borderWidth = 1.0
-        entryPicker7.layer.cornerRadius = 7.0
-        entryPicker7.layer.masksToBounds = true
-        
-        */
-        
-        
-
-        
         let pickerInput = ["0","1","2","3","4","5","6","7","8","9"]
-        
         Observable.just([["£"]])
             .bind(to: entryPicker1.rx.items(adapter: PickerViewViewAdapter()))
             .disposed(by: disposeBag)
@@ -108,18 +57,9 @@ class CombinedViewController: UIViewController {
         Observable.just([Array(0...9).map{"\($0)"}])
             .bind(to: entryPicker7.rx.items(adapter: PickerViewViewAdapter()))
             .disposed(by: disposeBag)
-        
-        
-        
-        /*
-        
-        Observable.just([Array(0...9).map{"\($0)"}])
-            .bind(to: entryPicker.rx.items(adapter: PickerViewViewAdapter()))
-            .disposed(by: disposeBag)
- 
- */
-        
-        controller.historyDataOutput.bind(to: historyTableView.rx.items(cellIdentifier: "CombinedCell", cellType: CombinedTableViewCell.self)) { row, model, cell in
+        spendStore.spendOutput.map { [weak self]  spendDateAndValueArray  in
+            return self?.getTotalByDayForTableView(spendDateAndValueArray: spendDateAndValueArray) ?? []
+        }.bind(to: historyTableView.rx.items(cellIdentifier: "CombinedCell", cellType: CombinedTableViewCell.self)) { row, model, cell in
             cell.date.text = "\(model.date)"
             cell.spending.text = "\(model.total)"
             cell.layer.cornerRadius = 5
@@ -131,28 +71,58 @@ class CombinedViewController: UIViewController {
             cell.layer.borderWidth = 2
             cell.layer.borderColor = UIColor.black.cgColor
             }.disposed(by: disposeBag)
-        
-//        Observable.just([HistoryTableInput(date: "today", total: "25")])
-        
-  
-        
     }
-    
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         //Ask controller to send data
-        controller.send()
+        spendStore.send()
     }
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    
+    struct DayHistoryTableInput {
+        var date : String
+        var total : String
     }
-    */
+    
+    func dateToText (_ date: Date) -> String {
+        let weekDay = DateFormatter().weekdaySymbols[Calendar.current.component(.weekday, from: date)-1]
+        let month = DateFormatter().monthSymbols[Calendar.current.component(.month, from: date)-1]
+        let dayOfMonth = Calendar.current.component(.day, from: date)
+        return ("\(weekDay) \(dayOfMonth) \(month)")
+    }
+    
+    
+    func getTotalByDayForTableView (spendDateAndValueArray : [SpendDateAndValue]) -> [DayHistoryTableInput] {
+        struct UnitsAndSubunits {
+            var units : SpendIntType
+            var subUnits : SpendIntType
+        }
+        var dayDictionary : Dictionary<Date, UnitsAndSubunits> = [:]
+        
+        spendDateAndValueArray.forEach { (spendDateAndValue) in
+            guard let thisDate = spendDateAndValue.date else {
+                os_log("date is nil")
+                return
+            }
+            // let calendar = Calendar.current
+            let thisStartOfDay = Calendar.current.startOfDay(for: thisDate)
+            if dayDictionary[thisStartOfDay] == nil {
+                dayDictionary[thisStartOfDay] = UnitsAndSubunits(units: spendDateAndValue.units, subUnits: spendDateAndValue.subUnits)
+            }
+            else {
+                //TODO: make this add up properly
+                dayDictionary[thisStartOfDay]?.units += spendDateAndValue.units
+                dayDictionary[thisStartOfDay]?.subUnits += spendDateAndValue.subUnits
+            }
+        }
+        var totalByDay : [DayHistoryTableInput] = []
+        // now need to produce structure for table UIView
+        dayDictionary.forEach { (key: Date, value: UnitsAndSubunits) in
+            totalByDay.append(DayHistoryTableInput(date: dateToText(key), total: "\(value.units):\(value.subUnits)"))
+            //   totalByDay.append(SpendDateAndValue(date: key, units: value.units, subUnits: value.subUnits))
+        }
+        return totalByDay
+    }
 
 }
