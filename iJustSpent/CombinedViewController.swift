@@ -57,8 +57,8 @@ class CombinedViewController: UIViewController {
         Observable.just([Array(0...9).map{"\($0)"}])
             .bind(to: entryPicker7.rx.items(adapter: PickerViewViewAdapter()))
             .disposed(by: disposeBag)
-        spendStore.spendOutput.map { [weak self]  spendDateAndValueArray  in
-            return self?.getTotalByDayForTableView(spendDateAndValueArray: spendDateAndValueArray) ?? []
+        spendStore.spendOutput.map { spendDateAndValueArray  in
+            return GetTotalByDayForTableView.getTotalByDayForTableView(spendDateAndValueArray: spendDateAndValueArray )
         }.bind(to: historyTableView.rx.items(cellIdentifier: "CombinedCell", cellType: CombinedTableViewCell.self)) { row, model, cell in
             cell.date.text = "\(model.date)"
             cell.spending.text = "\(model.total)"
@@ -78,22 +78,29 @@ class CombinedViewController: UIViewController {
         //Ask controller to send data
         spendStore.send()
     }
+}
 
+
+//TODO: rename and put in another file
+class GetTotalByDayForTableView {
     
+    
+    //TODO user defaults
+   // private let currencySymbol : String = "£"
+
     struct DayHistoryTableInput {
         var date : String
         var total : String
     }
     
-    func dateToText (_ date: Date) -> String {
+    private static func dateToText (_ date: Date) -> String {
         let weekDay = DateFormatter().weekdaySymbols[Calendar.current.component(.weekday, from: date)-1]
         let month = DateFormatter().monthSymbols[Calendar.current.component(.month, from: date)-1]
         let dayOfMonth = Calendar.current.component(.day, from: date)
         return ("\(weekDay) \(dayOfMonth) \(month)")
     }
     
-    
-    func getTotalByDayForTableView (spendDateAndValueArray : [SpendDateAndValue]) -> [DayHistoryTableInput] {
+    static func getTotalByDayForTableView (spendDateAndValueArray : [SpendDateAndValue]) -> [DayHistoryTableInput] {
         struct UnitsAndSubunits {
             var units : SpendIntType
             var subUnits : SpendIntType
@@ -105,24 +112,41 @@ class CombinedViewController: UIViewController {
                 os_log("date is nil")
                 return
             }
-            // let calendar = Calendar.current
             let thisStartOfDay = Calendar.current.startOfDay(for: thisDate)
+            print(spendDateAndValue)
             if dayDictionary[thisStartOfDay] == nil {
                 dayDictionary[thisStartOfDay] = UnitsAndSubunits(units: spendDateAndValue.units, subUnits: spendDateAndValue.subUnits)
+                print("adding new entry")
             }
             else {
-                //TODO: make this add up properly
-                dayDictionary[thisStartOfDay]?.units += spendDateAndValue.units
-                dayDictionary[thisStartOfDay]?.subUnits += spendDateAndValue.subUnits
+                print("amending entry")
+                let subUnitsSum = (dayDictionary[thisStartOfDay]?.subUnits ?? 999) + spendDateAndValue.subUnits
+                let subUnitsMod = subUnitsSum % 100
+                let subUnitsCarry = SpendIntType((subUnitsSum-subUnitsMod)/100)
+                let unitsSum = (dayDictionary[thisStartOfDay]?.units ?? 999) + spendDateAndValue.units + subUnitsCarry
+                
+               // print ("subUnitsSum \(subUnitsSum) = \(dayDictionary[thisStartOfDay]?.subUnits ?? 999) + \(spendDateAndValue.subUnits)")
+
+                print ("units sum \(unitsSum)")
+                print ("subUnitsMod \(subUnitsMod)")
+                dayDictionary[thisStartOfDay]?.units = unitsSum
+                dayDictionary[thisStartOfDay]?.subUnits = subUnitsMod
             }
         }
         var totalByDay : [DayHistoryTableInput] = []
         // now need to produce structure for table UIView
         dayDictionary.forEach { (key: Date, value: UnitsAndSubunits) in
-            totalByDay.append(DayHistoryTableInput(date: dateToText(key), total: "\(value.units):\(value.subUnits)"))
+            
+            //todo sort out symbol
+            totalByDay.append(DayHistoryTableInput(date: dateToText(key), total: "£\(value.units):\(String(format: "%02d", value.subUnits ))"  ))
+            
+            
+            
             //   totalByDay.append(SpendDateAndValue(date: key, units: value.units, subUnits: value.subUnits))
         }
         return totalByDay
     }
-
+    
+    
+    
 }
