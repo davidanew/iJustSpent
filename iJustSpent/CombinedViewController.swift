@@ -1,10 +1,4 @@
-//
-//  combinedViewController.swift
-//  iJustSpent
-//
-//  Created by David New on 06/05/2019.
 //  Copyright © 2019 David New. All rights reserved.
-//
 
 import UIKit
 import RxSwift
@@ -12,7 +6,6 @@ import RxCocoa
 import os.log
 
 class CombinedViewController: UIViewController {
- //   @IBOutlet weak var topButton: UIButton!
     @IBOutlet weak var segControl: UISegmentedControl!
     @IBOutlet weak var entryPicker1: UIPickerView!
     @IBOutlet weak var entryPicker2: UIPickerView!
@@ -25,20 +18,10 @@ class CombinedViewController: UIViewController {
     @IBOutlet weak var historyTableView: UITableView!
     
     let disposeBag = DisposeBag()
-    //let controller = HistoryController()
     let spendStore = SpendStore()
-    
-    /*
-    class EntryPickers {
-        static let picker1 : inout UISegmentedControl
-        
-    }
- */
- 
  
     override func viewDidLoad() {
         super.viewDidLoad()
-
         
         let grayColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0.8)
         let yellowColor = UIColor(red: 1, green: 0.7, blue: 0, alpha: 1)
@@ -49,11 +32,7 @@ class CombinedViewController: UIViewController {
         botButton.setTitleColor(UIColor.black, for:UIControlState.normal)
         
         setupPickerViews()
-        
-        //TODO: map tap to history view entry
-        
-        
-        
+
         botButton.rx.tap.map { [weak self] _ -> SpendDateAndValue in
             let unitsCombined = SpendIntType(self?.entryPicker2.selectedRow(inComponent: 0) ?? 0) * 100 +
                 SpendIntType(self?.entryPicker3.selectedRow(inComponent: 0) ?? 0) * 10 +
@@ -74,28 +53,6 @@ class CombinedViewController: UIViewController {
             self?.entryPicker7.selectRow(0, inComponent: 0, animated: true)
         }).disposed(by: disposeBag)
         
-        /*
-        botButton.rx.tap.map { _  in
-            return []
-            }.bind(to: historyTableView.rx.items(cellIdentifier: "CombinedCell", cellType: CombinedTableViewCell.self)) { row, model, cell in
-                cell.backgroundColor = UIColor.red
-            }.disposed(by: disposeBag)
-        */
-        
-        //TODO need to merge to get this to work maybe
-        
-        /*
-        
-        Observable.combineLatest(
-            spendStore.spendOutput,
-                                 botButton.rx.tap,
-                                 botButton.rx.tap.delay(0.3, scheduler: MainScheduler.instance))
-        {(value1 : () ,value2,value3) in
-            return nil
-            
-        }
-        */
-        
         struct DayHistoryTableInput {
             var date : String
             var total : String
@@ -107,9 +64,7 @@ class CombinedViewController: UIViewController {
             case entryButtonUp
         }
         
-        
-        //let x = TableviewUpdateEvent.spendOutput
-        
+        /*
         
         let delme = Observable.combineLatest(spendStore.spendOutput,
                                  spendStore.spendOutput.map{_ in return TableviewUpdateEvent.spendOutput},
@@ -123,40 +78,25 @@ class CombinedViewController: UIViewController {
         
         _ = delme
         
-        
+        */
 
-        
-        
-        
-   
-        
         spendStore.spendOutput.map { spendDateAndValueArray  in
-       //     print ("spendOutput")
             return GetTotalByDayForTableView.getTotalByDayForTableView(spendDateAndValueArray: spendDateAndValueArray )
-        }.debug()
+            }.debug()
             .bind(to: historyTableView.rx.items(cellIdentifier: "CombinedCell", cellType: CombinedTableViewCell.self)) { row, model, cell in
-            cell.date.text = "\(model.date)"
-            cell.spending.text = "\(model.total)"
-            cell.layer.cornerRadius = 5
-            cell.layer.masksToBounds = true
-            //cell.backgroundColor = UIColor(red: 1, green: 0.7, blue: 0, alpha: 1)
-            cell.backgroundColor = grayColor
-
-            cell.tintColor = UIColor.black
-            cell.layer.borderWidth = 2
-            cell.layer.borderColor = UIColor.black.cgColor
-            
-            
-            if row == 0 {
-                cell.backgroundColor = yellowColor
-             //   DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-             //       cell.backgroundColor = tableviewBackgroundColor
-             //   }
-            }
-            
+                cell.date.text = "\(model.date)"
+                cell.spending.text = "\(model.total)"
+                cell.layer.cornerRadius = 5
+                cell.layer.masksToBounds = true
+                cell.backgroundColor = grayColor
+                cell.tintColor = UIColor.black
+                cell.layer.borderWidth = 2
+                cell.layer.borderColor = UIColor.black.cgColor
+                if row == 0 {
+                    cell.backgroundColor = yellowColor
+                }
+                
             }.disposed(by: disposeBag)
-        
-        
         
     }
     
@@ -193,9 +133,6 @@ class CombinedViewController: UIViewController {
         spendStore.send()
     }
 }
-
-
-
 
 //TODO: rename and put in another file
 class GetTotalByDayForTableView {
