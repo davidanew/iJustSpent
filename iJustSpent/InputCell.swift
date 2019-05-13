@@ -8,6 +8,7 @@
 
 import UIKit
 
+@available(iOS, deprecated)
 class InputCell: UICollectionViewCell {
     
     @IBOutlet weak var label: UILabel!

@@ -4,6 +4,8 @@ import UIKit
 import RxSwift
 import RxCocoa
 
+
+@available(iOS, deprecated)
 class EntryView: UIViewController {
     
     let disposeBag = DisposeBag()

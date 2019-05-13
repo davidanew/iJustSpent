@@ -15,6 +15,7 @@ struct HistoryTableInput {
     var total : String
 }
 
+@available(iOS, deprecated)
 class HistoryController {
     
     //TODO user defaults

@@ -8,6 +8,7 @@
 
 import UIKit
 
+@available(iOS, deprecated)
 class HistoryTableViewCell2: UITableViewCell {
 
     @IBOutlet weak var date: UILabel!

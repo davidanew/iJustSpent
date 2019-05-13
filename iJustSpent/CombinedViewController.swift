@@ -32,9 +32,49 @@ class CombinedViewController: UIViewController {
         super.viewDidLoad()
         segControl.backgroundColor = .clear
         segControl.tintColor = UIColor(red: 1, green: 0.7, blue: 0, alpha: 1)
-        botButton.backgroundColor = UIColor(red: 1, green: 0.7, blue: 0, alpha: 1)
+        let botButtonBackgroundColor = UIColor(red: 1, green: 0.7, blue: 0, alpha: 1)
+        botButton.backgroundColor = botButtonBackgroundColor
         botButton.layer.cornerRadius = 5
         botButton.setTitleColor(UIColor.black, for:UIControlState.normal)
+        
+        setupPickerViews()
+        
+        //TODO: also map tap to clear
+        //TODO: map tap to button animation
+        //TODO: map tap to history view entry
+        //TODO: dont add entry if it is zero
+        
+        botButton.rx.tap.map { [weak self] _ -> SpendDateAndValue in
+            let unitsCombined = SpendIntType(self?.entryPicker2.selectedRow(inComponent: 0) ?? 0) * 100 +
+                SpendIntType(self?.entryPicker3.selectedRow(inComponent: 0) ?? 0) * 10 +
+                SpendIntType(self?.entryPicker4.selectedRow(inComponent: 0) ?? 0)
+            let subUnitsCombined = SpendIntType(self?.entryPicker6.selectedRow(inComponent: 0) ?? 0) * 10 +
+                SpendIntType(self?.entryPicker7.selectedRow(inComponent: 0) ?? 0)
+            return SpendDateAndValue(date: Date(), units: unitsCombined, subUnits: subUnitsCombined)
+        }.bind(to: spendStore.newSpendInput).disposed(by: disposeBag)
+        
+        botButton.rx.tap.map{_ in return UIColor.red}.bind(to: botButton.rx.backgroundColor).disposed(by: disposeBag)
+        botButton.rx.tap.delay(0.2, scheduler: MainScheduler.instance).map{_ in return botButtonBackgroundColor}.bind(to: botButton.rx.backgroundColor).disposed(by: disposeBag)
+        
+       
+        spendStore.spendOutput.map { spendDateAndValueArray  in
+            return GetTotalByDayForTableView.getTotalByDayForTableView(spendDateAndValueArray: spendDateAndValueArray )
+        }.bind(to: historyTableView.rx.items(cellIdentifier: "CombinedCell", cellType: CombinedTableViewCell.self)) { row, model, cell in
+            cell.date.text = "\(model.date)"
+            cell.spending.text = "\(model.total)"
+            cell.layer.cornerRadius = 5
+            cell.layer.masksToBounds = true
+            //cell.backgroundColor = UIColor(red: 1, green: 0.7, blue: 0, alpha: 1)
+            cell.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0.8)
+
+            cell.tintColor = UIColor.black
+            cell.layer.borderWidth = 2
+            cell.layer.borderColor = UIColor.black.cgColor
+            }.disposed(by: disposeBag)
+    }
+    
+    func setupPickerViews() {
+        
         let pickerInput = ["0","1","2","3","4","5","6","7","8","9"]
         Observable.just([["£"]])
             .bind(to: entryPicker1.rx.items(adapter: PickerViewViewAdapter()))
@@ -57,21 +97,8 @@ class CombinedViewController: UIViewController {
         Observable.just([Array(0...9).map{"\($0)"}])
             .bind(to: entryPicker7.rx.items(adapter: PickerViewViewAdapter()))
             .disposed(by: disposeBag)
-        spendStore.spendOutput.map { spendDateAndValueArray  in
-            return GetTotalByDayForTableView.getTotalByDayForTableView(spendDateAndValueArray: spendDateAndValueArray )
-        }.bind(to: historyTableView.rx.items(cellIdentifier: "CombinedCell", cellType: CombinedTableViewCell.self)) { row, model, cell in
-            cell.date.text = "\(model.date)"
-            cell.spending.text = "\(model.total)"
-            cell.layer.cornerRadius = 5
-            cell.layer.masksToBounds = true
-            //cell.backgroundColor = UIColor(red: 1, green: 0.7, blue: 0, alpha: 1)
-            cell.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0.8)
-
-            cell.tintColor = UIColor.black
-            cell.layer.borderWidth = 2
-            cell.layer.borderColor = UIColor.black.cgColor
-            }.disposed(by: disposeBag)
     }
+    
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -81,13 +108,10 @@ class CombinedViewController: UIViewController {
 }
 
 
+
+
 //TODO: rename and put in another file
 class GetTotalByDayForTableView {
-    
-    
-    //TODO user defaults
-   // private let currencySymbol : String = "£"
-
     struct DayHistoryTableInput {
         var date : String
         var total : String
@@ -124,9 +148,6 @@ class GetTotalByDayForTableView {
                 let subUnitsMod = subUnitsSum % 100
                 let subUnitsCarry = SpendIntType((subUnitsSum-subUnitsMod)/100)
                 let unitsSum = (dayDictionary[thisStartOfDay]?.units ?? 999) + spendDateAndValue.units + subUnitsCarry
-                
-               // print ("subUnitsSum \(subUnitsSum) = \(dayDictionary[thisStartOfDay]?.subUnits ?? 999) + \(spendDateAndValue.subUnits)")
-
                 print ("units sum \(unitsSum)")
                 print ("subUnitsMod \(subUnitsMod)")
                 dayDictionary[thisStartOfDay]?.units = unitsSum
@@ -136,17 +157,12 @@ class GetTotalByDayForTableView {
         var totalByDay : [DayHistoryTableInput] = []
         // now need to produce structure for table UIView
         dayDictionary.forEach { (key: Date, value: UnitsAndSubunits) in
-            
             //todo sort out symbol
             totalByDay.append(DayHistoryTableInput(date: dateToText(key), total: "£\(value.units):\(String(format: "%02d", value.subUnits ))"  ))
-            
-            
-            
-            //   totalByDay.append(SpendDateAndValue(date: key, units: value.units, subUnits: value.subUnits))
-        }
+            }
+        totalByDay.sort(by: { (input1: DayHistoryTableInput, input2: DayHistoryTableInput ) -> Bool in
+            return (input1.date < input2.date)
+        })
         return totalByDay
     }
-    
-    
-    
 }

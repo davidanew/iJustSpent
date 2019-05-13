@@ -10,6 +10,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 
+@available(iOS, deprecated)
 class HistoryView: UIViewController {
     private let disposeBag = DisposeBag()
     //Table view of all spending

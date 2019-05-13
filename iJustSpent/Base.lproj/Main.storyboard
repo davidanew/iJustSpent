@@ -272,8 +272,8 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wlP-Jc-9Bg" userLabel="Bot Buttons">
                                         <rect key="frame" x="0.0" y="256" width="375" height="40"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aKD-op-gpU">
-                                                <rect key="frame" x="87.5" y="5" width="200" height="30"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aKD-op-gpU">
+                                                <rect key="frame" x="87.5" y="3" width="200" height="34"/>
                                                 <color key="backgroundColor" red="0.7803921568627451" green="0.0" blue="0.0039215686274509803" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="200" id="LGL-Jv-0wS"/>

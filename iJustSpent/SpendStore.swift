@@ -12,13 +12,7 @@ typealias SpendIntType = Int16
     let units : SpendIntType
     let subUnits : SpendIntType
 }
-/*
-struct SpendValue {
-    let units : SpendIntType
-    let subUnits : SpendIntType
-}
-*/
- 
+
 class SpendStore  {
     private let disposeBag = DisposeBag()
     private let calendar = Calendar.current
@@ -28,8 +22,9 @@ class SpendStore  {
     let newSpendInput = PublishSubject<SpendDateAndValue>()
     //init maps subscriptions
     init() {
-        //TODO: put on another thread
-        newSpendInput.subscribe(onNext : {[weak self] (newSpend : SpendDateAndValue) in
+        newSpendInput
+            //.observeOn(ConcurrentDispatchQueueScheduler(qos: .userInitiated))
+            .subscribe(onNext : {[weak self] (newSpend : SpendDateAndValue) in
             let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
             let newCoreDataSpend = Spend(context: context)
             newCoreDataSpend.date = newSpend.date

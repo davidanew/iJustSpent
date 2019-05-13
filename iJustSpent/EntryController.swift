@@ -4,6 +4,7 @@ import Foundation
 import RxSwift
 import RxCocoa
 
+@available(iOS, deprecated)
 class EntryController {
     
     private let disposeBag = DisposeBag()
