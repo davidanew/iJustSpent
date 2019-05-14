@@ -30,7 +30,7 @@ class SpendStoreTests: XCTestCase {
         
         spendStore.spendOutput.subscribe(onNext: {
             print("total by day")
-            print(GetTotalByDayForTableView.getTotalByDayForTableView(spendDateAndValueArray: $0))
+            print(TableUtils.getTotalByDayForTableView(spendDateAndValueArray: $0))
             print("total by day end")
             getTotalByDayExpectation.fulfill()
         }).disposed(by: disposeBag)

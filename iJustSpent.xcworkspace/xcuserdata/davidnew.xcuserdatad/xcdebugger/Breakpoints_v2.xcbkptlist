@@ -10,13 +10,61 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "iJustSpentTests/SpendStoreTests.swift"
-            timestampString = "579110173.145852"
+            timestampString = "579544522.0444109"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "32"
             endingLineNumber = "32"
             landmarkName = "testExample()"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "iJustSpent/TableUtils.swift"
+            timestampString = "579544522.04448"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "59"
+            endingLineNumber = "59"
+            landmarkName = "getTotalByDayForTableView(spendDateAndValueArray:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "static iJustSpent.TableUtils.getTotalByDayForTableView(spendDateAndValueArray: Swift.Array&lt;iJustSpent.SpendDateAndValue&gt;) -&gt; Swift.Array&lt;iJustSpent.TableUtils.DayHistoryTableInput&gt;"
+                  moduleName = "iJustSpent"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/davidnew/xcode/iJustSpent/iJustSpent/TableUtils.swift"
+                  timestampString = "579543251.013263"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "60"
+                  endingLineNumber = "60"
+                  offsetFromSymbolStart = "722">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #3 (Foundation.Date, UnitsAndSubunits #1 in static iJustSpent.TableUtils.getTotalByDayForTableView(spendDateAndValueArray: Swift.Array&lt;iJustSpent.SpendDateAndValue&gt;) -&gt; Swift.Array&lt;iJustSpent.TableUtils.DayHistoryTableInput&gt;) -&gt; () in static iJustSpent.TableUtils.getTotalByDayForTableView(spendDateAndValueArray: Swift.Array&lt;iJustSpent.SpendDateAndValue&gt;) -&gt; Swift.Array&lt;iJustSpent.TableUtils.DayHistoryTableInput&gt;"
+                  moduleName = "iJustSpent"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/davidnew/xcode/iJustSpent/iJustSpent/TableUtils.swift"
+                  timestampString = "579543251.015996"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "62"
+                  endingLineNumber = "62"
+                  offsetFromSymbolStart = "84">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

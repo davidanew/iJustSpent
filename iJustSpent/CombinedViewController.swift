@@ -5,8 +5,9 @@ import RxSwift
 import RxCocoa
 import os.log
 
+//TODO: make sure no overflow
+
 class CombinedViewController: UIViewController {
-    @IBOutlet weak var segControl: UISegmentedControl!
     @IBOutlet weak var entryPicker1: UIPickerView!
     @IBOutlet weak var entryPicker2: UIPickerView!
     @IBOutlet weak var entryPicker3: UIPickerView!
@@ -19,14 +20,18 @@ class CombinedViewController: UIViewController {
     
     let disposeBag = DisposeBag()
     let spendStore = SpendStore()
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
  
     override func viewDidLoad() {
         super.viewDidLoad()
         
         let grayColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0.8)
         let yellowColor = UIColor(red: 1, green: 0.7, blue: 0, alpha: 1)
-        segControl.backgroundColor = .clear
-        segControl.tintColor = yellowColor
+        //segControl.backgroundColor = .clear
+        //segControl.tintColor = yellowColor
         botButton.backgroundColor = yellowColor
         botButton.layer.cornerRadius = 5
         botButton.setTitleColor(UIColor.black, for:UIControlState.normal)
@@ -63,26 +68,10 @@ class CombinedViewController: UIViewController {
             case entryButtonDown
             case entryButtonUp
         }
-        
-        /*
-        
-        let delme = Observable.combineLatest(spendStore.spendOutput,
-                                 spendStore.spendOutput.map{_ in return TableviewUpdateEvent.spendOutput},
-                                 botButton.rx.tap.map{_ in return TableviewUpdateEvent.entryButtonDown},
-                                 botButton.rx.tap.delay(0.3, scheduler: MainScheduler.instance).map{_ in return TableviewUpdateEvent.entryButtonUp},
-                                 
-                                 resultSelector: { (spendOutput : [SpendDateAndValue] ,  spendOutputEvent  , buttonDownEvent, buttonUpEvent) -> [SpendDateAndValue]  in
-                                    return spendOutput
-                                    
-        })
-        
-        _ = delme
-        
-        */
 
         spendStore.spendOutput.map { spendDateAndValueArray  in
-            return GetTotalByDayForTableView.getTotalByDayForTableView(spendDateAndValueArray: spendDateAndValueArray )
-            }.debug()
+            return TableUtils.getTotalByDayForTableView(spendDateAndValueArray: spendDateAndValueArray )
+            }
             .bind(to: historyTableView.rx.items(cellIdentifier: "CombinedCell", cellType: CombinedTableViewCell.self)) { row, model, cell in
                 cell.date.text = "\(model.date)"
                 cell.spending.text = "\(model.total)"
@@ -92,12 +81,10 @@ class CombinedViewController: UIViewController {
                 cell.tintColor = UIColor.black
                 cell.layer.borderWidth = 2
                 cell.layer.borderColor = UIColor.black.cgColor
-                if row == 0 {
+                if model.date == "Today" {
                     cell.backgroundColor = yellowColor
                 }
-                
             }.disposed(by: disposeBag)
-        
     }
     
     func setupPickerViews() {
@@ -126,67 +113,9 @@ class CombinedViewController: UIViewController {
             .disposed(by: disposeBag)
     }
     
-    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         //Ask controller to send data
         spendStore.send()
-    }
-}
-
-//TODO: rename and put in another file
-class GetTotalByDayForTableView {
-    struct DayHistoryTableInput {
-        var date : String
-        var total : String
-    }
-    
-    private static func dateToText (_ date: Date) -> String {
-        let weekDay = DateFormatter().weekdaySymbols[Calendar.current.component(.weekday, from: date)-1]
-        let month = DateFormatter().monthSymbols[Calendar.current.component(.month, from: date)-1]
-        let dayOfMonth = Calendar.current.component(.day, from: date)
-        return ("\(weekDay) \(dayOfMonth) \(month)")
-    }
-    //todo needs to retunr today,yesterday etc
-    static func getTotalByDayForTableView (spendDateAndValueArray : [SpendDateAndValue]) -> [DayHistoryTableInput] {
-        struct UnitsAndSubunits {
-            var units : SpendIntType
-            var subUnits : SpendIntType
-        }
-        var dayDictionary : Dictionary<Date, UnitsAndSubunits> = [:]
-        
-        spendDateAndValueArray.forEach { (spendDateAndValue) in
-            guard let thisDate = spendDateAndValue.date else {
-                os_log("date is nil")
-                return
-            }
-            let thisStartOfDay = Calendar.current.startOfDay(for: thisDate)
-       //     print(spendDateAndValue)
-            if dayDictionary[thisStartOfDay] == nil {
-                dayDictionary[thisStartOfDay] = UnitsAndSubunits(units: spendDateAndValue.units, subUnits: spendDateAndValue.subUnits)
-        //        print("adding new entry")
-            }
-            else {
-       //         print("amending entry")
-                let subUnitsSum = (dayDictionary[thisStartOfDay]?.subUnits ?? 999) + spendDateAndValue.subUnits
-                let subUnitsMod = subUnitsSum % 100
-                let subUnitsCarry = SpendIntType((subUnitsSum-subUnitsMod)/100)
-                let unitsSum = (dayDictionary[thisStartOfDay]?.units ?? 999) + spendDateAndValue.units + subUnitsCarry
-       //         print ("units sum \(unitsSum)")
-       //         print ("subUnitsMod \(subUnitsMod)")
-                dayDictionary[thisStartOfDay]?.units = unitsSum
-                dayDictionary[thisStartOfDay]?.subUnits = subUnitsMod
-            }
-        }
-        var totalByDay : [DayHistoryTableInput] = []
-        // now need to produce structure for table UIView
-        dayDictionary.forEach { (key: Date, value: UnitsAndSubunits) in
-            //todo sort out symbol
-            totalByDay.append(DayHistoryTableInput(date: dateToText(key), total: "£\(value.units):\(String(format: "%02d", value.subUnits ))"  ))
-            }
-        totalByDay.sort(by: { (input1: DayHistoryTableInput, input2: DayHistoryTableInput ) -> Bool in
-            return (input1.date < input2.date)
-        })
-        return totalByDay
     }
 }

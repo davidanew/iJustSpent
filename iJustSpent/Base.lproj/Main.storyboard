@@ -19,30 +19,17 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wkt-uW-Us2" userLabel="Picker And Buttons">
-                                <rect key="frame" x="0.0" y="20" width="375" height="296"/>
+                                <rect key="frame" x="0.0" y="396" width="375" height="271"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dvM-7b-E19" userLabel="Top Bottons">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
-                                        <subviews>
-                                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="T8g-hh-5FR">
-                                                <rect key="frame" x="127" y="6" width="121" height="29"/>
-                                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <segments>
-                                                    <segment title="First"/>
-                                                    <segment title="Second"/>
-                                                </segments>
-                                                <color key="tintColor" red="0.78039215689999997" green="0.0" blue="0.0039215686269999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            </segmentedControl>
-                                        </subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dvM-7b-E19" userLabel="Top Bottons Unused">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="0.0"/>
                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstItem="T8g-hh-5FR" firstAttribute="centerY" secondItem="dvM-7b-E19" secondAttribute="centerY" id="Abj-DE-H80"/>
-                                            <constraint firstItem="T8g-hh-5FR" firstAttribute="centerX" secondItem="dvM-7b-E19" secondAttribute="centerX" id="g0f-4g-z58"/>
-                                            <constraint firstAttribute="height" constant="40" id="g6U-of-bYJ"/>
+                                            <constraint firstAttribute="height" id="g6U-of-bYJ"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gkq-9H-7rQ" userLabel="Pickers">
-                                        <rect key="frame" x="0.0" y="40" width="375" height="216"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="216"/>
                                         <subviews>
                                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hn2-0U-Lve">
                                                 <rect key="frame" x="4" y="0.0" width="53" height="216"/>
@@ -66,7 +53,6 @@
                                                 <rect key="frame" x="318" y="0.0" width="53" height="216"/>
                                             </pickerView>
                                         </subviews>
-                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="xXf-SO-Cf2" firstAttribute="top" secondItem="gkq-9H-7rQ" secondAttribute="top" id="3Lc-91-xHa"/>
                                             <constraint firstItem="048-wN-9bE" firstAttribute="leading" secondItem="hn2-0U-Lve" secondAttribute="trailing" constant="4" id="5jh-9h-fyn"/>
@@ -99,7 +85,7 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wlP-Jc-9Bg" userLabel="Bot Buttons">
-                                        <rect key="frame" x="0.0" y="256" width="375" height="40"/>
+                                        <rect key="frame" x="0.0" y="216" width="375" height="40"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aKD-op-gpU">
                                                 <rect key="frame" x="87.5" y="3" width="200" height="34"/>
@@ -112,7 +98,6 @@
                                                 </state>
                                             </button>
                                         </subviews>
-                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="aKD-op-gpU" firstAttribute="centerY" secondItem="wlP-Jc-9Bg" secondAttribute="centerY" id="1WK-41-dLb"/>
                                             <constraint firstAttribute="height" constant="40" id="OHa-MG-iwP"/>
@@ -120,9 +105,9 @@
                                         </constraints>
                                     </view>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="wlP-Jc-9Bg" secondAttribute="bottom" id="8JJ-eR-Lig"/>
+                                    <constraint firstAttribute="bottom" secondItem="wlP-Jc-9Bg" secondAttribute="bottom" constant="15" id="8JJ-eR-Lig"/>
                                     <constraint firstItem="wlP-Jc-9Bg" firstAttribute="leading" secondItem="Wkt-uW-Us2" secondAttribute="leading" id="JDb-am-qkY"/>
                                     <constraint firstItem="gkq-9H-7rQ" firstAttribute="top" secondItem="dvM-7b-E19" secondAttribute="bottom" id="Qlb-aP-uIL"/>
                                     <constraint firstItem="gkq-9H-7rQ" firstAttribute="leading" secondItem="Wkt-uW-Us2" secondAttribute="leading" id="RV3-I3-PJC"/>
@@ -134,15 +119,15 @@
                                     <constraint firstAttribute="trailing" secondItem="dvM-7b-E19" secondAttribute="trailing" id="y53-yr-tNe"/>
                                 </constraints>
                             </view>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="m7k-5W-QLr">
-                                <rect key="frame" x="0.0" y="331" width="375" height="336"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="m7k-5W-QLr">
+                                <rect key="frame" x="0.0" y="20" width="375" height="376"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CombinedCell" id="CYx-S9-XUC" customClass="CombinedTableViewCell" customModule="iJustSpent" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="CYx-S9-XUC" id="ZGY-uz-kTe">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="left" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bdo-JK-ylc">
@@ -174,13 +159,13 @@
                             </tableView>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="P4W-9W-C6U" firstAttribute="bottom" secondItem="m7k-5W-QLr" secondAttribute="bottom" id="3jc-3m-LsT"/>
                             <constraint firstAttribute="trailing" secondItem="Wkt-uW-Us2" secondAttribute="trailing" id="86s-u6-IiY"/>
-                            <constraint firstItem="Wkt-uW-Us2" firstAttribute="top" secondItem="P4W-9W-C6U" secondAttribute="top" id="e8I-Dx-TmQ"/>
                             <constraint firstItem="Wkt-uW-Us2" firstAttribute="leading" secondItem="ZBG-Kk-KiP" secondAttribute="leading" id="gbh-dT-6B9"/>
                             <constraint firstItem="m7k-5W-QLr" firstAttribute="trailing" secondItem="P4W-9W-C6U" secondAttribute="trailing" id="m3u-PK-ijP"/>
-                            <constraint firstItem="m7k-5W-QLr" firstAttribute="top" secondItem="Wkt-uW-Us2" secondAttribute="bottom" constant="15" id="m9i-CV-9pX"/>
+                            <constraint firstItem="m7k-5W-QLr" firstAttribute="top" secondItem="P4W-9W-C6U" secondAttribute="top" id="m8m-gW-OH6"/>
+                            <constraint firstItem="Wkt-uW-Us2" firstAttribute="top" secondItem="m7k-5W-QLr" secondAttribute="bottom" id="o5i-gh-hlr"/>
                             <constraint firstItem="m7k-5W-QLr" firstAttribute="leading" secondItem="P4W-9W-C6U" secondAttribute="leading" id="yOU-hS-9YJ"/>
+                            <constraint firstItem="P4W-9W-C6U" firstAttribute="bottom" secondItem="Wkt-uW-Us2" secondAttribute="bottom" id="ysc-w3-GmW"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="P4W-9W-C6U"/>
                     </view>
@@ -195,7 +180,6 @@
                         <outlet property="entryPicker6" destination="isb-Xf-iYt" id="Dh5-1o-hdd"/>
                         <outlet property="entryPicker7" destination="bqm-VV-NmX" id="Wkl-U6-cDq"/>
                         <outlet property="historyTableView" destination="m7k-5W-QLr" id="Ita-sa-C4d"/>
-                        <outlet property="segControl" destination="T8g-hh-5FR" id="fih-5r-pfd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="urB-Mm-ozh" userLabel="First Responder" sceneMemberID="firstResponder"/>
