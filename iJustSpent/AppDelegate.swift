@@ -24,19 +24,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     @objc func significantTimeChangeNotification() {
         //Posted when there is a significant change in time, for example, change to a new day (midnight), carrier time update, and change to or from daylight savings time.
-        //os_log("significantTimeChangeNotification")
-        //same code as below, could make function
-        //request updated data for visible view controller
-
-        guard let tabBarController = self.window?.rootViewController as? UITabBarController else {
-            return
-        }
-        //print(tabBarController.selectedViewController)
-        if let viewController = tabBarController.selectedViewController as? HistoryView {
-            viewController.controller.send()
-        }
-        if let viewController = tabBarController.selectedViewController as? EntryView {
-            viewController.controller.send()
+        if let viewController = self.window?.rootViewController as? CombinedViewController {
+            viewController.spendStore.send()
         }
     }
 
@@ -59,14 +48,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //print("applicationDidBecomeActive")
         
         //request updated data for visible view controller
-        guard let tabBarController = self.window?.rootViewController as? UITabBarController else {
-            return
-        }
-        if let viewController = tabBarController.selectedViewController as? HistoryView {
-            viewController.controller.send()
-        }
-        if let viewController = tabBarController.selectedViewController as? EntryView {
-            viewController.controller.send()
+        if let viewController = self.window?.rootViewController as? CombinedViewController {
+            viewController.spendStore.send()
         }
     }
 

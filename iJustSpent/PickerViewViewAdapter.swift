@@ -37,17 +37,12 @@ class PickerViewViewAdapter
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
         let label = UILabel()
         label.text = items[component][row].description
-        
+        //TODO: Sort this out
         if  ["£",":"] .contains(label.text) {
             label.backgroundColor = UIColor.black
             label.textColor = UIColor.white
         }
-            /*
-        else if label.text == ":" {
-            label.backgroundColor = UIColor.black
-            label.textColor = UIColor.white
-        }
- */
+
         else if ["1","2","3","4","5","6","7","8","9"] .contains(label.text) {
             label.backgroundColor = UIColor.darkGray
             label.textColor = UIColor.white
@@ -55,27 +50,13 @@ class PickerViewViewAdapter
         else {
             label.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
             label.textColor = UIColor.black
-
-            
         }
-        
-        
- 
-        
 
         label.font = UIFont.systemFont(ofSize: 60)
         label.textAlignment = .center
- 
-        
-        
-        
-        
         return label
     }
-    
   
-    
-    
     func pickerView(_ pickerView: UIPickerView, observedEvent: Event<Element>) {
         Binder(self) { (adapter, items) in
             adapter.items = items

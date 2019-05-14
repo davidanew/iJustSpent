@@ -11,25 +11,18 @@
 		A6F55F5600921EF643EF8413 /* Pods_iJustSpent.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D46B9BC8C36E9180704B3026 /* Pods_iJustSpent.framework */; };
 		C81F15DA22807AF000DF5CEE /* CombinedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C81F15D922807AF000DF5CEE /* CombinedViewController.swift */; };
 		C81F15DC22807C4E00DF5CEE /* PickerViewViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C81F15DB22807C4E00DF5CEE /* PickerViewViewAdapter.swift */; };
-		C856811822748C8A00FEA8E3 /* HistoryTableViewCell2.swift in Sources */ = {isa = PBXBuildFile; fileRef = C856811722748C8A00FEA8E3 /* HistoryTableViewCell2.swift */; };
 		C861D05522836F5C00CF52CF /* SpendStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C861D05422836F5C00CF52CF /* SpendStoreTests.swift */; };
-		C863C24422733AFD00A6555E /* HistoryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C863C24322733AFD00A6555E /* HistoryController.swift */; };
 		C863C24822738AAD00A6555E /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = C863C24722738AAD00A6555E /* Errors.swift */; };
 		C86D49812281DD2F007E2C9D /* CombinedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C86D49802281DD2F007E2C9D /* CombinedTableViewCell.swift */; };
-		C894F3132271EA5800D357CF /* EntryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C894F3122271EA5700D357CF /* EntryController.swift */; };
 		C897BE072266301300296B1F /* Notes.rtf in Resources */ = {isa = PBXBuildFile; fileRef = C897BE062266301300296B1F /* Notes.rtf */; };
-		C897BE0922663B9700296B1F /* DataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = C897BE0822663B9700296B1F /* DataStore.swift */; };
-		C897EBCA2268AE0D00628B7E /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C897EBC92268AE0D00628B7E /* HistoryView.swift */; };
 		C89B3CF52282E9670009C60E /* SpendStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = C89B3CF42282E9670009C60E /* SpendStore.swift */; };
 		C8E4D85D225CC48B00C69682 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8E4D85C225CC48B00C69682 /* AppDelegate.swift */; };
-		C8E4D85F225CC48B00C69682 /* EntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8E4D85E225CC48B00C69682 /* EntryView.swift */; };
 		C8E4D862225CC48B00C69682 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C8E4D860225CC48B00C69682 /* Main.storyboard */; };
 		C8E4D865225CC48B00C69682 /* iJustSpent.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C8E4D863225CC48B00C69682 /* iJustSpent.xcdatamodeld */; };
 		C8E4D867225CC48F00C69682 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C8E4D866225CC48F00C69682 /* Assets.xcassets */; };
 		C8E4D86A225CC48F00C69682 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C8E4D868225CC48F00C69682 /* LaunchScreen.storyboard */; };
 		C8E4D875225CC48F00C69682 /* dataStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8E4D874225CC48F00C69682 /* dataStoreTests.swift */; };
 		C8E4D880225CC48F00C69682 /* iJustSpentUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8E4D87F225CC48F00C69682 /* iJustSpentUITests.swift */; };
-		C8E4D88E225CDBEA00C69682 /* InputCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8E4D88D225CDBEA00C69682 /* InputCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,20 +47,14 @@
 		8177AE74647544BC6F1DAB7F /* Pods-iJustSpent.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iJustSpent.release.xcconfig"; path = "Pods/Target Support Files/Pods-iJustSpent/Pods-iJustSpent.release.xcconfig"; sourceTree = "<group>"; };
 		C81F15D922807AF000DF5CEE /* CombinedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombinedViewController.swift; sourceTree = "<group>"; };
 		C81F15DB22807C4E00DF5CEE /* PickerViewViewAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerViewViewAdapter.swift; sourceTree = "<group>"; };
-		C856811722748C8A00FEA8E3 /* HistoryTableViewCell2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTableViewCell2.swift; sourceTree = "<group>"; };
 		C861D05422836F5C00CF52CF /* SpendStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpendStoreTests.swift; sourceTree = "<group>"; };
-		C863C24322733AFD00A6555E /* HistoryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryController.swift; sourceTree = "<group>"; };
 		C863C24722738AAD00A6555E /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		C86D49802281DD2F007E2C9D /* CombinedTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombinedTableViewCell.swift; sourceTree = "<group>"; };
 		C894F3112270B92F00D357CF /* RxSwiftPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = RxSwiftPlayground.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		C894F3122271EA5700D357CF /* EntryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryController.swift; sourceTree = "<group>"; };
 		C897BE062266301300296B1F /* Notes.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = Notes.rtf; sourceTree = "<group>"; };
-		C897BE0822663B9700296B1F /* DataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStore.swift; sourceTree = "<group>"; };
-		C897EBC92268AE0D00628B7E /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
 		C89B3CF42282E9670009C60E /* SpendStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpendStore.swift; sourceTree = "<group>"; };
 		C8E4D859225CC48B00C69682 /* iJustSpent.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iJustSpent.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C8E4D85C225CC48B00C69682 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		C8E4D85E225CC48B00C69682 /* EntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntryView.swift; sourceTree = "<group>"; };
 		C8E4D861225CC48B00C69682 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C8E4D864225CC48B00C69682 /* iJustSpent.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = iJustSpent.xcdatamodel; sourceTree = "<group>"; };
 		C8E4D866225CC48F00C69682 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -79,7 +66,6 @@
 		C8E4D87B225CC48F00C69682 /* iJustSpentUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iJustSpentUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C8E4D87F225CC48F00C69682 /* iJustSpentUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iJustSpentUITests.swift; sourceTree = "<group>"; };
 		C8E4D881225CC48F00C69682 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C8E4D88D225CDBEA00C69682 /* InputCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputCell.swift; sourceTree = "<group>"; };
 		D35D0B206E9D75481348DEF7 /* Pods-iJustSpentTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iJustSpentTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iJustSpentTests/Pods-iJustSpentTests.debug.xcconfig"; sourceTree = "<group>"; };
 		D46B9BC8C36E9180704B3026 /* Pods_iJustSpent.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iJustSpent.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DFFAC53E76DB2FB5B2BA9817 /* Pods-iJustSpent.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iJustSpent.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iJustSpent/Pods-iJustSpent.debug.xcconfig"; sourceTree = "<group>"; };
@@ -161,19 +147,12 @@
 				C894F3112270B92F00D357CF /* RxSwiftPlayground.playground */,
 				C8E4D85C225CC48B00C69682 /* AppDelegate.swift */,
 				C863C24722738AAD00A6555E /* Errors.swift */,
-				C8E4D85E225CC48B00C69682 /* EntryView.swift */,
-				C894F3122271EA5700D357CF /* EntryController.swift */,
-				C897BE0822663B9700296B1F /* DataStore.swift */,
-				C897EBC92268AE0D00628B7E /* HistoryView.swift */,
-				C863C24322733AFD00A6555E /* HistoryController.swift */,
 				C8E4D860225CC48B00C69682 /* Main.storyboard */,
 				C8E4D866225CC48F00C69682 /* Assets.xcassets */,
 				C8E4D868225CC48F00C69682 /* LaunchScreen.storyboard */,
 				C8E4D86B225CC48F00C69682 /* Info.plist */,
 				C8E4D863225CC48B00C69682 /* iJustSpent.xcdatamodeld */,
-				C8E4D88D225CDBEA00C69682 /* InputCell.swift */,
 				C897BE062266301300296B1F /* Notes.rtf */,
-				C856811722748C8A00FEA8E3 /* HistoryTableViewCell2.swift */,
 				C81F15D922807AF000DF5CEE /* CombinedViewController.swift */,
 				C81F15DB22807C4E00DF5CEE /* PickerViewViewAdapter.swift */,
 				C86D49802281DD2F007E2C9D /* CombinedTableViewCell.swift */,
@@ -432,19 +411,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C897EBCA2268AE0D00628B7E /* HistoryView.swift in Sources */,
 				C86D49812281DD2F007E2C9D /* CombinedTableViewCell.swift in Sources */,
 				C8E4D865225CC48B00C69682 /* iJustSpent.xcdatamodeld in Sources */,
-				C8E4D85F225CC48B00C69682 /* EntryView.swift in Sources */,
-				C8E4D88E225CDBEA00C69682 /* InputCell.swift in Sources */,
-				C897BE0922663B9700296B1F /* DataStore.swift in Sources */,
 				C89B3CF52282E9670009C60E /* SpendStore.swift in Sources */,
 				C81F15DA22807AF000DF5CEE /* CombinedViewController.swift in Sources */,
-				C863C24422733AFD00A6555E /* HistoryController.swift in Sources */,
 				C8E4D85D225CC48B00C69682 /* AppDelegate.swift in Sources */,
 				C863C24822738AAD00A6555E /* Errors.swift in Sources */,
-				C894F3132271EA5800D357CF /* EntryController.swift in Sources */,
-				C856811822748C8A00FEA8E3 /* HistoryTableViewCell2.swift in Sources */,
 				C81F15DC22807C4E00DF5CEE /* PickerViewViewAdapter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
