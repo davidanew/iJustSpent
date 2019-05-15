@@ -5,7 +5,13 @@ import RxSwift
 import RxCocoa
 import os.log
 
-//TODO: make sure no overflow
+//TODO: Make sure no overflow on total
+//TODO: Short names for date and make sure there will be no overlap problems
+//TODO: Comments!
+//TODO: Sort out constraint warning on table view cell
+//TODO: Change currency symbol
+//TODO: Memory leak/deinit tests
+//TODO: fix chopped table view cells
 
 class CombinedViewController: UIViewController {
     @IBOutlet weak var entryPicker1: UIPickerView!
@@ -30,8 +36,6 @@ class CombinedViewController: UIViewController {
         
         let grayColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0.8)
         let yellowColor = UIColor(red: 1, green: 0.7, blue: 0, alpha: 1)
-        //segControl.backgroundColor = .clear
-        //segControl.tintColor = yellowColor
         botButton.backgroundColor = yellowColor
         botButton.layer.cornerRadius = 5
         botButton.setTitleColor(UIColor.black, for:UIControlState.normal)
@@ -39,6 +43,7 @@ class CombinedViewController: UIViewController {
         setupPickerViews()
 
         botButton.rx.tap.map { [weak self] _ -> SpendDateAndValue in
+            //TODO: Put this on function to make it clearer
             let unitsCombined = SpendIntType(self?.entryPicker2.selectedRow(inComponent: 0) ?? 0) * 100 +
                 SpendIntType(self?.entryPicker3.selectedRow(inComponent: 0) ?? 0) * 10 +
                 SpendIntType(self?.entryPicker4.selectedRow(inComponent: 0) ?? 0)

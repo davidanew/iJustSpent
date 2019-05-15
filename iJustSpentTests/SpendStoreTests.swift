@@ -5,6 +5,7 @@ import Foundation
 import RxSwift
 import RxCocoa
 import os.log
+import CoreData
 
 
 @testable import iJustSpent
@@ -39,6 +40,61 @@ class SpendStoreTests: XCTestCase {
 
         wait(for: [getTotalByDayExpectation], timeout: 5)
 
+    }
+    
+    func testClearUserData() {
+        
+        let delegate = UIApplication.shared.delegate as! AppDelegate
+        let context = delegate.persistentContainer.viewContext
+        
+        let deleteFetch = NSFetchRequest<NSFetchRequestResult>(entityName: "Spend")
+        let deleteRequest = NSBatchDeleteRequest(fetchRequest: deleteFetch)
+        
+        do {
+            try context.execute(deleteRequest)
+            try context.save()
+        } catch {
+            print ("There was an error")
+        }
+        
+    }
+    
+    func testAddExampleData() {
+        
+        
+        func addOneItem (newSpend : SpendDateAndValue) {
+            let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+            let newCoreDataSpend = Spend(context: context)
+            newCoreDataSpend.date = newSpend.date
+            newCoreDataSpend.units = newSpend.units
+            newCoreDataSpend.subUnits = newSpend.subUnits
+            do{
+                try context.save()
+            }
+            catch {
+                os_log("New item context save error")
+                return
+            }
+        }
+        let dayInSeconds : TimeInterval = 60*60*24
+        
+        addOneItem(newSpend: SpendDateAndValue(date: Date(), units: 5, subUnits: 95))
+        addOneItem(newSpend: SpendDateAndValue(date: Date().addingTimeInterval(dayInSeconds * -1), units: 5, subUnits: 95))
+        addOneItem(newSpend: SpendDateAndValue(date: Date().addingTimeInterval(dayInSeconds * -2), units: 6, subUnits: 23))
+        addOneItem(newSpend: SpendDateAndValue(date: Date().addingTimeInterval(dayInSeconds * -3), units: 2, subUnits: 64))
+        addOneItem(newSpend: SpendDateAndValue(date: Date().addingTimeInterval(dayInSeconds * -4), units: 3, subUnits: 10))
+        addOneItem(newSpend: SpendDateAndValue(date: Date().addingTimeInterval(dayInSeconds * -5), units: 6, subUnits: 48))
+        
+        //addOneItem(newSpend: SpendDateAndValue(date: Date().addingTimeInterval(dayInSeconds * -6), units: 3, subUnits: 95))
+        //addOneItem(newSpend: SpendDateAndValue(date: Date().addingTimeInterval(dayInSeconds * -7), units: 6, subUnits: 96))
+        //addOneItem(newSpend: SpendDateAndValue(date: Date().addingTimeInterval(dayInSeconds * -8), units: 1, subUnits: 45))
+        //addOneItem(newSpend: SpendDateAndValue(date: Date().addingTimeInterval(dayInSeconds * -9), units: 2, subUnits: 98))
+        //addOneItem(newSpend: SpendDateAndValue(date: Date().addingTimeInterval(dayInSeconds * -10), units: 0, subUnits: 56))
+
+
+        
+        
+        
     }
 
 }
