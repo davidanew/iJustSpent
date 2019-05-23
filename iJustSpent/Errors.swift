@@ -2,7 +2,7 @@
 
 import Foundation
 
-//
+//Error type to just send a description string
 enum GenericError: Error {
     case description(text: String)
 }

@@ -7,26 +7,36 @@ import os.log
 
 //TODO: Make sure no overflow on total
 //TODO: Short names for date and make sure there will be no overlap problems
-//TODO: Comments!
 //TODO: Sort out constraint warning on table view cell
 //TODO: Change currency symbol
 //TODO: Memory leak/deinit tests
 //TODO: fix chopped table view cells
+//TODO: Changes colour on tap on table view
+//TODO: Undo feature
 
 class CombinedViewController: UIViewController {
+    //For spending value entry
+    //Currently this displays the pound sign
     @IBOutlet weak var entryPicker1: UIPickerView!
+    //Three digits for pounds
     @IBOutlet weak var entryPicker2: UIPickerView!
     @IBOutlet weak var entryPicker3: UIPickerView!
     @IBOutlet weak var entryPicker4: UIPickerView!
+    //Currently this shows a colon
     @IBOutlet weak var entryPicker5: UIPickerView!
+    //Pence entry
     @IBOutlet weak var entryPicker6: UIPickerView!
     @IBOutlet weak var entryPicker7: UIPickerView!
+    //Add spend button
     @IBOutlet weak var botButton: UIButton!
+    //Table view of daily spend
     @IBOutlet weak var historyTableView: UITableView!
     
     let disposeBag = DisposeBag()
+    //Handles Core Data operations
     let spendStore = SpendStore()
     
+    //Make the text in the title bar white
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
@@ -41,7 +51,8 @@ class CombinedViewController: UIViewController {
         botButton.setTitleColor(UIColor.black, for:UIControlState.normal)
         
         setupPickerViews()
-
+        
+        //On button tap calculate the amount spent and send this information to spendStore
         botButton.rx.tap.map { [weak self] _ -> SpendDateAndValue in
             //TODO: Put this on function to make it clearer
             let unitsCombined = SpendIntType(self?.entryPicker2.selectedRow(inComponent: 0) ?? 0) * 100 +
@@ -53,8 +64,11 @@ class CombinedViewController: UIViewController {
             }.filter{$0.units > 0 || $0.subUnits > 0}
             .bind(to: spendStore.newSpendInput).disposed(by: disposeBag)
         
+        //Highlight button on tap
         botButton.rx.tap.map{_ in return grayColor}.bind(to: botButton.rx.backgroundColor).disposed(by: disposeBag)
+        //Remove highlight after delay
         botButton.rx.tap.delay(0.3, scheduler: MainScheduler.instance).map{_ in return yellowColor}.bind(to: botButton.rx.backgroundColor).disposed(by: disposeBag)
+        //Clear picker on button tap
         botButton.rx.tap.subscribe(onNext:{[weak self] _ in
             self?.entryPicker2.selectRow(0, inComponent: 0, animated: true)
             self?.entryPicker3.selectRow(0, inComponent: 0, animated: true)
@@ -63,6 +77,7 @@ class CombinedViewController: UIViewController {
             self?.entryPicker7.selectRow(0, inComponent: 0, animated: true)
         }).disposed(by: disposeBag)
         
+        /*
         struct DayHistoryTableInput {
             var date : String
             var total : String
@@ -73,7 +88,11 @@ class CombinedViewController: UIViewController {
             case entryButtonDown
             case entryButtonUp
         }
-
+ */
+        
+        //When spendStore sends an update of it's stored data
+        //Send this to the tableview
+        
         spendStore.spendOutput.map { spendDateAndValueArray  in
             return TableUtils.getTotalByDayForTableView(spendDateAndValueArray: spendDateAndValueArray )
             }
@@ -120,7 +139,7 @@ class CombinedViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        //Ask controller to send data
+        //Ask spendStore to send initial data
         spendStore.send()
     }
 }

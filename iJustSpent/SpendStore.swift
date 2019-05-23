@@ -7,7 +7,9 @@ import os.log
 //Type used by core data to save int values
 typealias SpendIntType = Int16
 
-//TODO: Document usage of this
+//This is the structure used to input and output data
+//The input will be a single instance
+//The output is an array all all the transactions
 struct SpendDateAndValue {
     let date : Date?
     let units : SpendIntType
@@ -17,7 +19,7 @@ struct SpendDateAndValue {
 class SpendStore  {
     private let disposeBag = DisposeBag()
     private let calendar = Calendar.current
-    //
+    //Output to view controller, contains all spending data
     let spendOutput = PublishSubject<[SpendDateAndValue]>()
     //Input for a new spend from input controller
     let newSpendInput = PublishSubject<SpendDateAndValue>()

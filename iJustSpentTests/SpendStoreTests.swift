@@ -78,7 +78,7 @@ class SpendStoreTests: XCTestCase {
         }
         let dayInSeconds : TimeInterval = 60*60*24
         
-        addOneItem(newSpend: SpendDateAndValue(date: Date(), units: 5, subUnits: 95))
+        //addOneItem(newSpend: SpendDateAndValue(date: Date(), units: 5, subUnits: 95))
         addOneItem(newSpend: SpendDateAndValue(date: Date().addingTimeInterval(dayInSeconds * -1), units: 5, subUnits: 95))
         addOneItem(newSpend: SpendDateAndValue(date: Date().addingTimeInterval(dayInSeconds * -2), units: 6, subUnits: 23))
         addOneItem(newSpend: SpendDateAndValue(date: Date().addingTimeInterval(dayInSeconds * -3), units: 2, subUnits: 64))
