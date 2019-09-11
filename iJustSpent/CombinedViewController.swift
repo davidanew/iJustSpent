@@ -5,6 +5,7 @@ import RxSwift
 import RxCocoa
 import os.log
 
+//TODO: Pod update
 //TODO: Make sure no overflow on total
 //TODO: Short names for date and make sure there will be no overlap problems
 //TODO: Sort out constraint warning on table view cell
@@ -48,7 +49,9 @@ class CombinedViewController: UIViewController {
         let yellowColor = UIColor(red: 1, green: 0.7, blue: 0, alpha: 1)
         botButton.backgroundColor = yellowColor
         botButton.layer.cornerRadius = 5
-        botButton.setTitleColor(UIColor.black, for:UIControlState.normal)
+        //botButton.setTitleColor(UIColor.black, for:UIControlState.normal)
+        botButton.setTitleColor(UIColor.black, for:UIControl.State.normal)
+
         
         setupPickerViews()
         

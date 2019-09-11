@@ -2,11 +2,13 @@
 use_frameworks!
 
 target 'iJustSpent' do
-    pod 'RxSwift',    '~> 4.5.0'
-    pod 'RxCocoa',    '~> 4.5.0'
+    platform :ios, '10.0'
+    pod 'RxSwift',    '~> 5'
+    pod 'RxCocoa',    '~> 5'
 end
 
 target 'iJustSpentTests' do
-    pod 'RxSwift',    '~> 4.5.0'
-    pod 'RxCocoa',    '~> 4.5.0'
+    platform :ios, '12.2'
+    pod 'RxSwift',    '~> 5'
+    pod 'RxCocoa',    '~> 5'
 end
