@@ -5,9 +5,6 @@ import RxSwift
 import RxCocoa
 import os.log
 
-//TODO: Pod update
-//TODO: Make sure no overflow on total
-//TODO: Short names for date and make sure there will be no overlap problems
 //TODO: Sort out constraint warning on table view cell
 //TODO: Change currency symbol
 //TODO: Memory leak/deinit tests
@@ -49,7 +46,6 @@ class CombinedViewController: UIViewController {
         let yellowColor = UIColor(red: 1, green: 0.7, blue: 0, alpha: 1)
         botButton.backgroundColor = yellowColor
         botButton.layer.cornerRadius = 5
-        //botButton.setTitleColor(UIColor.black, for:UIControlState.normal)
         botButton.setTitleColor(UIColor.black, for:UIControl.State.normal)
 
         
@@ -83,19 +79,6 @@ class CombinedViewController: UIViewController {
             self?.entryPicker6.selectRow(0, inComponent: 0, animated: true)
             self?.entryPicker7.selectRow(0, inComponent: 0, animated: true)
         }).disposed(by: disposeBag)
-        
-        /*
-        struct DayHistoryTableInput {
-            var date : String
-            var total : String
-        }
-        
-        enum TableviewUpdateEvent {
-            case spendOutput
-            case entryButtonDown
-            case entryButtonUp
-        }
- */
         
         //When spendStore sends an update of it's stored data
         //Send this to the tableview
