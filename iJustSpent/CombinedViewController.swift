@@ -70,7 +70,11 @@ class CombinedViewController: UIViewController {
         //Highlight button on tap
         botButton.rx.tap.map{_ in return grayColor}.bind(to: botButton.rx.backgroundColor).disposed(by: disposeBag)
         //Remove highlight after delay
-        botButton.rx.tap.delay(0.3, scheduler: MainScheduler.instance).map{_ in return yellowColor}.bind(to: botButton.rx.backgroundColor).disposed(by: disposeBag)
+        //botButton.rx.tap.delay(0.3, scheduler: MainScheduler.instance).map{_ in return yellowColor}.bind(to: botButton.rx.backgroundColor).disposed(by: disposeBag)
+        
+        botButton.rx.tap.delay(.milliseconds(300), scheduler: MainScheduler.instance).map{_ in return yellowColor}.bind(to: botButton.rx.backgroundColor).disposed(by: disposeBag)
+        //botButton.rx.tap.delay(.milliseconds(500), scheduler: MainScheduler.instance)
+        
         //Clear picker on button tap
         botButton.rx.tap.subscribe(onNext:{[weak self] _ in
             self?.entryPicker2.selectRow(0, inComponent: 0, animated: true)
