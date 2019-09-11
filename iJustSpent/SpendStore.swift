@@ -5,7 +5,7 @@ import RxSwift
 import CoreData
 import os.log
 //Type used by core data to save int values
-typealias SpendIntType = Int16
+typealias SpendIntType = Int32
 
 //This is the structure used to input and output data
 //The input will be a single instance
