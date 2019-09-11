@@ -11,8 +11,8 @@ class TableUtils {
     }
     
     private static func dateToText (_ date: Date) -> String {
-        let weekDay = DateFormatter().weekdaySymbols[Calendar.current.component(.weekday, from: date)-1]
-        let month = DateFormatter().monthSymbols[Calendar.current.component(.month, from: date)-1]
+        let weekDay = DateFormatter().shortWeekdaySymbols[Calendar.current.component(.weekday, from: date)-1]
+        let month = DateFormatter().shortMonthSymbols[Calendar.current.component(.month, from: date)-1]
         let dayOfMonth = Calendar.current.component(.day, from: date)
         return ("\(weekDay) \(dayOfMonth) \(month)")
     }
@@ -22,7 +22,7 @@ class TableUtils {
             var units : SpendIntType
             var subUnits : SpendIntType
         }
-        //Dictionat that will hold the above struct
+        //Dictionary that will hold the above struct
         var dayDictionary : Dictionary<Date, UnitsAndSubunits> = [:]
         //For each spend add this to a dictionary entry corresponding to that day
         spendDateAndValueArray.forEach { (spendDateAndValue) in
