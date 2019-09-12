@@ -5,13 +5,14 @@ import RxSwift
 import RxCocoa
 import os.log
 
-
-//TODO: Currency symbol save in user defaults
-//TODO: Currency symbol on table
-//TODO: Memory leak/deinit tests
+//TODO: Tidy up pickerview contoller - esp getting row
 //TODO: Undo feature
 //TODO: Left over todos
+//TODO: Memory leak/deinit tests
+//TODO: GUI tests
 //TODO: only release limited regions
+
+
 
 class CombinedViewController: UIViewController {
     //For spending value entry
@@ -35,7 +36,6 @@ class CombinedViewController: UIViewController {
     //Handles Core Data operations
     let spendStore = SpendStore()
     
-    let defaults = UserDefaults.standard
     
     let currencySymbolArray = ["£","$","€"]
     
@@ -47,6 +47,8 @@ class CombinedViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let defaults = UserDefaults.standard
+
         let currencySymbol = defaults.object(forKey:"currencySymbol") as? String ?? "$"
         let currencySymbolRow = currencySymbolArray.firstIndex(of: currencySymbol) ?? 0
     
@@ -134,6 +136,13 @@ class CombinedViewController: UIViewController {
         Observable.just([pickerInput])
             .bind(to: entryPicker7.rx.items(adapter: PickerViewViewAdapter()))
             .disposed(by: disposeBag)
+        entryPicker1.tag = 1
+        entryPicker2.tag = 2
+        entryPicker3.tag = 3
+        entryPicker4.tag = 4
+        entryPicker5.tag = 5
+        entryPicker6.tag = 6
+        entryPicker7.tag = 7
     }
     
     override func viewDidAppear(_ animated: Bool) {
