@@ -5,14 +5,13 @@ import RxSwift
 import RxCocoa
 import os.log
 
-//TODO: Tidy up pickerview contoller - esp getting row
-//TODO: Undo feature
-//TODO: Left over todos
+//TODO: Undo feature - plan first:
+//add simple buttn first
+
+//TODO: Left over todos (currently none)
 //TODO: Memory leak/deinit tests
 //TODO: GUI tests
 //TODO: only release limited regions
-
-
 
 class CombinedViewController: UIViewController {
     //For spending value entry
@@ -28,8 +27,10 @@ class CombinedViewController: UIViewController {
     @IBOutlet weak var entryPicker6: UIPickerView!
     @IBOutlet weak var entryPicker7: UIPickerView!
     //Add spend button
-    @IBOutlet weak var botButton: UIButton!
+    //@IBOutlet weak var addButton: UIButton!
     //Table view of daily spend
+    @IBOutlet weak var addButton: UIButton!
+    @IBOutlet weak var undoButton: UIButton!
     @IBOutlet weak var historyTableView: UITableView!
     
     let disposeBag = DisposeBag()
@@ -54,17 +55,17 @@ class CombinedViewController: UIViewController {
     
         let grayColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0.8)
         let yellowColor = UIColor(red: 1, green: 0.7, blue: 0, alpha: 1)
-        botButton.backgroundColor = yellowColor
-        botButton.layer.cornerRadius = 5
-        botButton.setTitleColor(UIColor.black, for:UIControl.State.normal)
+        //addButton.backgroundColor = yellowColor
+        undoButton.layer.cornerRadius = 5
+        addButton.layer.cornerRadius = 5
+        //addButton.setTitleColor(UIColor.black, for:UIControl.State.normal)
         
         setupPickerViews()
         
         entryPicker1.selectRow(currencySymbolRow, inComponent: 0, animated: true)
         
         //On button tap calculate the amount spent and send this information to spendStore
-        botButton.rx.tap.map { [weak self] _ -> SpendDateAndValue in
-            //TODO: Put this on function to make it clearer
+        addButton.rx.tap.map { [weak self] _ -> SpendDateAndValue in
             let unitsCombined = SpendIntType(self?.entryPicker2.selectedRow(inComponent: 0) ?? 0) * 100 +
                 SpendIntType(self?.entryPicker3.selectedRow(inComponent: 0) ?? 0) * 10 +
                 SpendIntType(self?.entryPicker4.selectedRow(inComponent: 0) ?? 0)
@@ -75,15 +76,15 @@ class CombinedViewController: UIViewController {
             .bind(to: spendStore.newSpendInput).disposed(by: disposeBag)
         
         //Highlight button on tap
-        botButton.rx.tap.map{_ in return grayColor}.bind(to: botButton.rx.backgroundColor).disposed(by: disposeBag)
+        addButton.rx.tap.map{_ in return grayColor}.bind(to: addButton.rx.backgroundColor).disposed(by: disposeBag)
         //Remove highlight after delay
         //botButton.rx.tap.delay(0.3, scheduler: MainScheduler.instance).map{_ in return yellowColor}.bind(to: botButton.rx.backgroundColor).disposed(by: disposeBag)
         
-        botButton.rx.tap.delay(.milliseconds(300), scheduler: MainScheduler.instance).map{_ in return yellowColor}.bind(to: botButton.rx.backgroundColor).disposed(by: disposeBag)
+        addButton.rx.tap.delay(.milliseconds(300), scheduler: MainScheduler.instance).map{_ in return yellowColor}.bind(to: addButton.rx.backgroundColor).disposed(by: disposeBag)
         //botButton.rx.tap.delay(.milliseconds(500), scheduler: MainScheduler.instance)
         
         //Clear picker on button tap
-        botButton.rx.tap.subscribe(onNext:{[weak self] _ in
+        addButton.rx.tap.subscribe(onNext:{[weak self] _ in
             self?.entryPicker2.selectRow(0, inComponent: 0, animated: true)
             self?.entryPicker3.selectRow(0, inComponent: 0, animated: true)
             self?.entryPicker4.selectRow(0, inComponent: 0, animated: true)

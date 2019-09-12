@@ -60,7 +60,6 @@ class TableUtils {
             else {
                 dateText = dateToText(key)
             }
-            //TODO: sort out symbol
             let defaults = UserDefaults.standard
             let currencySymbol = defaults.object(forKey:"currencySymbol") as? String ?? "$"
             totalByDay.append(DayHistoryTableInput(date: dateText, total: "\(currencySymbol)\(value.units):\(String(format: "%02d", value.subUnits ))"  ))

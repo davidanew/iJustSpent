@@ -1,0 +1,8 @@
+git fetch
+
+
+git diff HEAD...origin/master
+
+git diff origin/master...HEAD
+
+git merge origin/master

@@ -85,14 +85,26 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wlP-Jc-9Bg" userLabel="Bot Buttons">
-                                        <rect key="frame" x="0.0" y="216" width="375" height="40"/>
+                                        <rect key="frame" x="32.5" y="216" width="310" height="40"/>
                                         <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ekh-ld-3iZ" userLabel="Undo Button">
+                                                <rect key="frame" x="0.0" y="0.0" width="100" height="40"/>
+                                                <color key="backgroundColor" red="1" green="0.69803921568627447" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="b1a-RT-rIq"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                                <state key="normal" title="Undo">
+                                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
+                                            </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aKD-op-gpU">
-                                                <rect key="frame" x="87.5" y="3" width="200" height="34"/>
-                                                <color key="backgroundColor" red="0.7803921568627451" green="0.0" blue="0.0039215686274509803" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <rect key="frame" x="110" y="0.0" width="200" height="40"/>
+                                                <color key="backgroundColor" red="1" green="0.69803921568627447" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="LGL-Jv-0wS"/>
                                                 </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                                 <state key="normal" title="Add Spend">
                                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
@@ -100,19 +112,24 @@
                                         </subviews>
                                         <constraints>
                                             <constraint firstItem="aKD-op-gpU" firstAttribute="centerY" secondItem="wlP-Jc-9Bg" secondAttribute="centerY" id="1WK-41-dLb"/>
+                                            <constraint firstItem="aKD-op-gpU" firstAttribute="leading" secondItem="ekh-ld-3iZ" secondAttribute="trailing" constant="10" id="2sb-V2-3YG"/>
+                                            <constraint firstAttribute="trailing" secondItem="aKD-op-gpU" secondAttribute="trailing" id="5vY-0C-fWZ"/>
+                                            <constraint firstItem="ekh-ld-3iZ" firstAttribute="leading" secondItem="wlP-Jc-9Bg" secondAttribute="leading" id="Cop-Ev-jFf"/>
                                             <constraint firstAttribute="height" constant="40" id="OHa-MG-iwP"/>
-                                            <constraint firstItem="aKD-op-gpU" firstAttribute="centerX" secondItem="wlP-Jc-9Bg" secondAttribute="centerX" id="Ygm-Zl-sS7"/>
+                                            <constraint firstItem="ekh-ld-3iZ" firstAttribute="top" secondItem="wlP-Jc-9Bg" secondAttribute="top" id="Oq6-nQ-6BG"/>
+                                            <constraint firstAttribute="bottom" secondItem="ekh-ld-3iZ" secondAttribute="bottom" id="Y2p-LF-RuD"/>
+                                            <constraint firstAttribute="bottom" secondItem="aKD-op-gpU" secondAttribute="bottom" id="YV1-9y-YHa"/>
+                                            <constraint firstItem="aKD-op-gpU" firstAttribute="top" secondItem="wlP-Jc-9Bg" secondAttribute="top" id="bev-se-OgO"/>
                                         </constraints>
                                     </view>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="wlP-Jc-9Bg" secondAttribute="bottom" constant="15" id="8JJ-eR-Lig"/>
-                                    <constraint firstItem="wlP-Jc-9Bg" firstAttribute="leading" secondItem="Wkt-uW-Us2" secondAttribute="leading" id="JDb-am-qkY"/>
                                     <constraint firstItem="gkq-9H-7rQ" firstAttribute="top" secondItem="dvM-7b-E19" secondAttribute="bottom" id="Qlb-aP-uIL"/>
                                     <constraint firstItem="gkq-9H-7rQ" firstAttribute="leading" secondItem="Wkt-uW-Us2" secondAttribute="leading" id="RV3-I3-PJC"/>
-                                    <constraint firstAttribute="trailing" secondItem="wlP-Jc-9Bg" secondAttribute="trailing" id="VtW-Mj-Hfc"/>
                                     <constraint firstItem="dvM-7b-E19" firstAttribute="top" secondItem="Wkt-uW-Us2" secondAttribute="top" id="bEj-ts-f89"/>
+                                    <constraint firstItem="wlP-Jc-9Bg" firstAttribute="centerX" secondItem="Wkt-uW-Us2" secondAttribute="centerX" id="cNT-PD-LUm"/>
                                     <constraint firstItem="dvM-7b-E19" firstAttribute="leading" secondItem="Wkt-uW-Us2" secondAttribute="leading" id="ie3-Rd-Kv0"/>
                                     <constraint firstItem="wlP-Jc-9Bg" firstAttribute="top" secondItem="gkq-9H-7rQ" secondAttribute="bottom" id="in5-D1-yIR"/>
                                     <constraint firstAttribute="trailing" secondItem="gkq-9H-7rQ" secondAttribute="trailing" id="qou-yE-KKV"/>
@@ -179,7 +196,7 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Item" id="m6o-At-btx"/>
                     <connections>
-                        <outlet property="botButton" destination="aKD-op-gpU" id="3T3-3Z-Hd3"/>
+                        <outlet property="addButton" destination="aKD-op-gpU" id="aYf-kN-aaq"/>
                         <outlet property="entryPicker1" destination="hn2-0U-Lve" id="VIy-9E-fIl"/>
                         <outlet property="entryPicker2" destination="048-wN-9bE" id="Bzm-F4-AAi"/>
                         <outlet property="entryPicker3" destination="Kyq-I1-OBd" id="bgM-Qo-RGu"/>
@@ -188,6 +205,7 @@
                         <outlet property="entryPicker6" destination="isb-Xf-iYt" id="Dh5-1o-hdd"/>
                         <outlet property="entryPicker7" destination="bqm-VV-NmX" id="Wkl-U6-cDq"/>
                         <outlet property="historyTableView" destination="m7k-5W-QLr" id="Ita-sa-C4d"/>
+                        <outlet property="undoButton" destination="ekh-ld-3iZ" id="67a-i7-5oe"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="urB-Mm-ozh" userLabel="First Responder" sceneMemberID="firstResponder"/>
