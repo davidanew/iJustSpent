@@ -35,25 +35,21 @@ class PickerViewViewAdapter
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
         let label = UILabel()
         label.text = items[component][row].description
-        //TODO: Sort this out
-        //TODO: How to identify picker row
-        if  ["£",":","$","€"] .contains(label.text) {
+        if pickerView.tag == 1 || pickerView.tag == 5 {
+            //Currency symbol or colon
             label.backgroundColor = UIColor.black
             label.textColor = UIColor.white
-            
+            //Save choice of currency symbol
             let defaults = UserDefaults.standard
             defaults.set(items[component][row].description, forKey: "currencySymbol")
-            
-            //if let viewController = self.window?.rootViewController as? CombinedViewController {
-            //    viewController.spendStore.send()
-           // }
-            //need static class to hold user defaults
-        }
 
+        }
+        //Else it is a number
         else if ["1","2","3","4","5","6","7","8","9"] .contains(label.text) {
             label.backgroundColor = UIColor.darkGray
             label.textColor = UIColor.white
         }
+        //Zeros a different colour
         else {
             label.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
             label.textColor = UIColor.black
