@@ -36,9 +36,18 @@ class PickerViewViewAdapter
         let label = UILabel()
         label.text = items[component][row].description
         //TODO: Sort this out
+        //TODO: How to identify picker row
         if  ["£",":","$","€"] .contains(label.text) {
             label.backgroundColor = UIColor.black
             label.textColor = UIColor.white
+            
+            let defaults = UserDefaults.standard
+            defaults.set(items[component][row].description, forKey: "currencySymbol")
+            
+            //if let viewController = self.window?.rootViewController as? CombinedViewController {
+            //    viewController.spendStore.send()
+           // }
+            //need static class to hold user defaults
         }
 
         else if ["1","2","3","4","5","6","7","8","9"] .contains(label.text) {

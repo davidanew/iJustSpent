@@ -35,6 +35,10 @@ class CombinedViewController: UIViewController {
     //Handles Core Data operations
     let spendStore = SpendStore()
     
+    let defaults = UserDefaults.standard
+    
+    let currencySymbolArray = ["£","$","€"]
+    
     //Make the text in the title bar white
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
@@ -43,16 +47,18 @@ class CombinedViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        
+        let currencySymbol = defaults.object(forKey:"currencySymbol") as? String ?? "$"
+        let currencySymbolRow = currencySymbolArray.firstIndex(of: currencySymbol) ?? 0
+    
         let grayColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0.8)
         let yellowColor = UIColor(red: 1, green: 0.7, blue: 0, alpha: 1)
         botButton.backgroundColor = yellowColor
         botButton.layer.cornerRadius = 5
         botButton.setTitleColor(UIColor.black, for:UIControl.State.normal)
-
         
         setupPickerViews()
+        
+        entryPicker1.selectRow(currencySymbolRow, inComponent: 0, animated: true)
         
         //On button tap calculate the amount spent and send this information to spendStore
         botButton.rx.tap.map { [weak self] _ -> SpendDateAndValue in
@@ -107,7 +113,7 @@ class CombinedViewController: UIViewController {
     func setupPickerViews() {
         
         let pickerInput = ["0","1","2","3","4","5","6","7","8","9"]
-        Observable.just([["£","$","€"]])
+        Observable.just([currencySymbolArray])
             .bind(to: entryPicker1.rx.items(adapter: PickerViewViewAdapter()))
             .disposed(by: disposeBag)
         Observable.just([pickerInput])
