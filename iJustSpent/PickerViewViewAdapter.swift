@@ -36,7 +36,7 @@ class PickerViewViewAdapter
         let label = UILabel()
         label.text = items[component][row].description
         //TODO: Sort this out
-        if  ["£",":"] .contains(label.text) {
+        if  ["£",":","$","€"] .contains(label.text) {
             label.backgroundColor = UIColor.black
             label.textColor = UIColor.white
         }
