@@ -5,12 +5,13 @@ import RxSwift
 import RxCocoa
 import os.log
 
-//TODO: Sort out constraint warning on table view cell
-//TODO: Change currency symbol
+
+//TODO: Currency symbol save in user defaults
+//TODO: Currency symbol on table
 //TODO: Memory leak/deinit tests
-//TODO: fix chopped table view cells
-//TODO: Changes colour on tap on table view
 //TODO: Undo feature
+//TODO: Left over todos
+//TODO: only release limited regions
 
 class CombinedViewController: UIViewController {
     //For spending value entry
@@ -41,6 +42,8 @@ class CombinedViewController: UIViewController {
  
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
         
         let grayColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0.8)
         let yellowColor = UIColor(red: 1, green: 0.7, blue: 0, alpha: 1)
@@ -104,25 +107,25 @@ class CombinedViewController: UIViewController {
     func setupPickerViews() {
         
         let pickerInput = ["0","1","2","3","4","5","6","7","8","9"]
-        Observable.just([["£"]])
+        Observable.just([["£","$","€"]])
             .bind(to: entryPicker1.rx.items(adapter: PickerViewViewAdapter()))
             .disposed(by: disposeBag)
         Observable.just([pickerInput])
             .bind(to: entryPicker2.rx.items(adapter: PickerViewViewAdapter()))
             .disposed(by: disposeBag)
-        Observable.just([Array(0...9).map{"\($0)"}])
+        Observable.just([pickerInput])
             .bind(to: entryPicker3.rx.items(adapter: PickerViewViewAdapter()))
             .disposed(by: disposeBag)
-        Observable.just([Array(0...9).map{"\($0)"}])
+        Observable.just([pickerInput])
             .bind(to: entryPicker4.rx.items(adapter: PickerViewViewAdapter()))
             .disposed(by: disposeBag)
         Observable.just([[":"]])
             .bind(to: entryPicker5.rx.items(adapter: PickerViewViewAdapter()))
             .disposed(by: disposeBag)
-        Observable.just([Array(0...9).map{"\($0)"}])
+        Observable.just([pickerInput])
             .bind(to: entryPicker6.rx.items(adapter: PickerViewViewAdapter()))
             .disposed(by: disposeBag)
-        Observable.just([Array(0...9).map{"\($0)"}])
+        Observable.just([pickerInput])
             .bind(to: entryPicker7.rx.items(adapter: PickerViewViewAdapter()))
             .disposed(by: disposeBag)
     }
