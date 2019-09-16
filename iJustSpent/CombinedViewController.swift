@@ -5,11 +5,7 @@ import RxSwift
 import RxCocoa
 import os.log
 
-//TODO: look at currency localisation
-//ijust spent maybe use localisation to get currency
-//or maybe to get initial value
-//or just get symbol from locale(easiest)
-//if keep picker then make it change the tableview sttraignt away
+//TODO: Remove user interaction where applicable
 //TODO: Left over todos
 //TODO: Comments
 //TODO: Memory leak/deinit tests
@@ -41,9 +37,6 @@ class CombinedViewController: UIViewController {
     //Handles Core Data operations
     let spendStore = SpendStore()
     
-    
-    //let currencySymbolArray = ["£","$","€"]
-    
     //Make the text in the title bar white
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
@@ -51,32 +44,14 @@ class CombinedViewController: UIViewController {
  
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
-        //let currencyFormatter = NumberFormatter()
-        
-        //currencyFormatter.currencySymbol
-        
-        
 
-        //let defaults = UserDefaults.standard
-        //let debug = NumberFormatter().currencySymbol
-       
-        //let currencySymbol = defaults.object(forKey:"currencySymbol") as? String ?? "$"
         let currencySymbol = NumberFormatter().currencySymbol ?? "$"
-        
-        //let currencySymbolRow = currencySymbolArray.firstIndex(of: currencySymbol) ?? 0
-    
         let grayColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0.8)
         let yellowColor = UIColor(red: 1, green: 0.7, blue: 0, alpha: 1)
-        //addButton.backgroundColor = yellowColor
         undoButton.layer.cornerRadius = 5
         addButton.layer.cornerRadius = 5
-        //addButton.setTitleColor(UIColor.black, for:UIControl.State.normal)
-        
         setupPickerViews(currencySymbol: currencySymbol)
         
-        //entryPicker1.selectRow(currencySymbolRow, inComponent: 0, animated: true)
         //TODO: comment
         undoButton.rx.tap.bind(to: spendStore.undoInput).disposed(by: disposeBag)
         
@@ -93,11 +68,9 @@ class CombinedViewController: UIViewController {
         
         //Highlight button on tap
         addButton.rx.tap.map{_ in return grayColor}.bind(to: addButton.rx.backgroundColor).disposed(by: disposeBag)
+  
         //Remove highlight after delay
-        //botButton.rx.tap.delay(0.3, scheduler: MainScheduler.instance).map{_ in return yellowColor}.bind(to: botButton.rx.backgroundColor).disposed(by: disposeBag)
-        
         addButton.rx.tap.delay(.milliseconds(300), scheduler: MainScheduler.instance).map{_ in return yellowColor}.bind(to: addButton.rx.backgroundColor).disposed(by: disposeBag)
-        //botButton.rx.tap.delay(.milliseconds(500), scheduler: MainScheduler.instance)
         
         //Clear picker on button tap
         addButton.rx.tap.subscribe(onNext:{[weak self] _ in
@@ -135,6 +108,7 @@ class CombinedViewController: UIViewController {
         Observable.just([[currencySymbol]])
             .bind(to: entryPicker1.rx.items(adapter: PickerViewViewAdapter()))
             .disposed(by: disposeBag)
+        entryPicker1.isUserInteractionEnabled = false
         Observable.just([pickerInput])
             .bind(to: entryPicker2.rx.items(adapter: PickerViewViewAdapter()))
             .disposed(by: disposeBag)
@@ -147,6 +121,7 @@ class CombinedViewController: UIViewController {
         Observable.just([[":"]])
             .bind(to: entryPicker5.rx.items(adapter: PickerViewViewAdapter()))
             .disposed(by: disposeBag)
+        entryPicker5.isUserInteractionEnabled = false
         Observable.just([pickerInput])
             .bind(to: entryPicker6.rx.items(adapter: PickerViewViewAdapter()))
             .disposed(by: disposeBag)
