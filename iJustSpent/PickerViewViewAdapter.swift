@@ -40,8 +40,8 @@ class PickerViewViewAdapter
             label.backgroundColor = UIColor.black
             label.textColor = UIColor.white
             //Save choice of currency symbol
-            let defaults = UserDefaults.standard
-            defaults.set(items[component][row].description, forKey: "currencySymbol")
+            //let defaults = UserDefaults.standard
+            //defaults.set(items[component][row].description, forKey: "currencySymbol")
 
         }
         //Else it is a number

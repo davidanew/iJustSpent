@@ -5,14 +5,13 @@ import RxSwift
 import RxCocoa
 import os.log
 
-//TODO: Undo feature - plan first:
-//add simple button first
-
+//TODO: look at currency localisation
 //ijust spent maybe use localisation to get currency
 //or maybe to get initial value
 //or just get symbol from locale(easiest)
 //if keep picker then make it change the tableview sttraignt away
-//TODO: Left over todos (currently none)
+//TODO: Left over todos
+//TODO: Comments
 //TODO: Memory leak/deinit tests
 //TODO: GUI tests
 //TODO: App icon and start screen
@@ -43,7 +42,7 @@ class CombinedViewController: UIViewController {
     let spendStore = SpendStore()
     
     
-    let currencySymbolArray = ["£","$","€"]
+    //let currencySymbolArray = ["£","$","€"]
     
     //Make the text in the title bar white
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -53,10 +52,20 @@ class CombinedViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let defaults = UserDefaults.standard
+        
+        //let currencyFormatter = NumberFormatter()
+        
+        //currencyFormatter.currencySymbol
+        
+        
 
-        let currencySymbol = defaults.object(forKey:"currencySymbol") as? String ?? "$"
-        let currencySymbolRow = currencySymbolArray.firstIndex(of: currencySymbol) ?? 0
+        //let defaults = UserDefaults.standard
+        //let debug = NumberFormatter().currencySymbol
+       
+        //let currencySymbol = defaults.object(forKey:"currencySymbol") as? String ?? "$"
+        let currencySymbol = NumberFormatter().currencySymbol ?? "$"
+        
+        //let currencySymbolRow = currencySymbolArray.firstIndex(of: currencySymbol) ?? 0
     
         let grayColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0.8)
         let yellowColor = UIColor(red: 1, green: 0.7, blue: 0, alpha: 1)
@@ -65,9 +74,9 @@ class CombinedViewController: UIViewController {
         addButton.layer.cornerRadius = 5
         //addButton.setTitleColor(UIColor.black, for:UIControl.State.normal)
         
-        setupPickerViews()
+        setupPickerViews(currencySymbol: currencySymbol)
         
-        entryPicker1.selectRow(currencySymbolRow, inComponent: 0, animated: true)
+        //entryPicker1.selectRow(currencySymbolRow, inComponent: 0, animated: true)
         //TODO: comment
         undoButton.rx.tap.bind(to: spendStore.undoInput).disposed(by: disposeBag)
         
@@ -120,10 +129,10 @@ class CombinedViewController: UIViewController {
             }.disposed(by: disposeBag)
     }
     
-    func setupPickerViews() {
+    func setupPickerViews(currencySymbol : String) {
         
         let pickerInput = ["0","1","2","3","4","5","6","7","8","9"]
-        Observable.just([currencySymbolArray])
+        Observable.just([[currencySymbol]])
             .bind(to: entryPicker1.rx.items(adapter: PickerViewViewAdapter()))
             .disposed(by: disposeBag)
         Observable.just([pickerInput])

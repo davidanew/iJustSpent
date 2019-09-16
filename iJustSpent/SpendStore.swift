@@ -49,7 +49,7 @@ class SpendStore  {
                 os_log("Context fetch error")
                 return
             }
-            //TODO: Understand and comment this
+            //comment this
             self?.spendOutput.onNext(updatedSpendArray.map{ (spend : Spend) -> SpendDateAndValue in
                 return SpendDateAndValue(date: spend.date, units: spend.units, subUnits: spend.subUnits)
             })
