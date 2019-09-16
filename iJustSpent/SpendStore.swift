@@ -23,17 +23,54 @@ class SpendStore  {
     let spendOutput = PublishSubject<[SpendDateAndValue]>()
     //Input for a new spend from input controller
     let newSpendInput = PublishSubject<SpendDateAndValue>()
+    
+    let undoInput = PublishSubject<Void>()
     //init maps subscriptions
     init() {
         //When a new spend comes in we add this to the core data and send the new data back
         newSpendInput
-            .subscribe(onNext : {[weak self] (newSpend : SpendDateAndValue) in
+        .subscribe(onNext : {[weak self] (newSpend : SpendDateAndValue) in
             let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
             //Construct new object to store the new spend
             let newCoreDataSpend = Spend(context: context)
             newCoreDataSpend.date = newSpend.date
             newCoreDataSpend.units = newSpend.units
             newCoreDataSpend.subUnits = newSpend.subUnits
+            do{
+                try context.save()
+            }
+            catch {
+                os_log("New item context save error")
+                return
+            }
+            //Save to core data has been done, now get all the data to send back
+            let request : NSFetchRequest<Spend> = Spend.fetchRequest()
+            guard let updatedSpendArray = try? context.fetch(request) else {
+                os_log("Context fetch error")
+                return
+            }
+            //TODO: Understand and comment this
+            self?.spendOutput.onNext(updatedSpendArray.map{ (spend : Spend) -> SpendDateAndValue in
+                return SpendDateAndValue(date: spend.date, units: spend.units, subUnits: spend.subUnits)
+            })
+        } ).disposed(by: disposeBag)
+        
+        undoInput
+        .subscribe(onNext : {[weak self] _ in
+            //Setup request to get latest item from core data
+            let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+            let requestLatest : NSFetchRequest<Spend> = Spend.fetchRequest()
+            requestLatest.sortDescriptors = [NSSortDescriptor(key: "date", ascending: false)]
+            requestLatest.fetchLimit = 1
+            //Try and get item
+            guard let latestItem = try? context.fetch(requestLatest) else {
+                return //this is not an error as list may be empty
+            }
+            //The above will get an array, we need to work on the individual item (this could be flatmap)
+            //TODO: flatmap experiment (optional)
+            for object in latestItem {
+                context.delete(object)
+            }
             do{
                 try context.save()
             }

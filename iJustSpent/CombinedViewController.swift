@@ -6,11 +6,16 @@ import RxCocoa
 import os.log
 
 //TODO: Undo feature - plan first:
-//add simple buttn first
+//add simple button first
 
+//ijust spent maybe use localisation to get currency
+//or maybe to get initial value
+//or just get symbol from locale(easiest)
+//if keep picker then make it change the tableview sttraignt away
 //TODO: Left over todos (currently none)
 //TODO: Memory leak/deinit tests
 //TODO: GUI tests
+//TODO: App icon and start screen
 //TODO: only release limited regions
 
 class CombinedViewController: UIViewController {
@@ -63,6 +68,8 @@ class CombinedViewController: UIViewController {
         setupPickerViews()
         
         entryPicker1.selectRow(currencySymbolRow, inComponent: 0, animated: true)
+        //TODO: comment
+        undoButton.rx.tap.bind(to: spendStore.undoInput).disposed(by: disposeBag)
         
         //On button tap calculate the amount spent and send this information to spendStore
         addButton.rx.tap.map { [weak self] _ -> SpendDateAndValue in
