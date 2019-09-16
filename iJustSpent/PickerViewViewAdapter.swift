@@ -36,13 +36,9 @@ class PickerViewViewAdapter
         let label = UILabel()
         label.text = items[component][row].description
         if pickerView.tag == 1 || pickerView.tag == 5 {
-            //Currency symbol or colon
+            //This tag is a currency symbol or colon
             label.backgroundColor = UIColor.black
             label.textColor = UIColor.white
-            //Save choice of currency symbol
-            //let defaults = UserDefaults.standard
-            //defaults.set(items[component][row].description, forKey: "currencySymbol")
-
         }
         //Else it is a number
         else if ["1","2","3","4","5","6","7","8","9"] .contains(label.text) {
@@ -54,7 +50,6 @@ class PickerViewViewAdapter
             label.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
             label.textColor = UIColor.black
         }
-
         label.font = UIFont.systemFont(ofSize: 60)
         label.textAlignment = .center
         return label

@@ -5,9 +5,10 @@ import RxSwift
 import RxCocoa
 import os.log
 
-//TODO: Remove user interaction where applicable
-//TODO: Left over todos
 //TODO: Comments
+//TODO: const where possible
+//TODO: rethink undo button as notes.
+//TODO: Device size tests
 //TODO: Memory leak/deinit tests
 //TODO: GUI tests
 //TODO: App icon and start screen
@@ -15,24 +16,24 @@ import os.log
 
 class CombinedViewController: UIViewController {
     //For spending value entry
-    //Currently this displays the pound sign
+    //Displays the currency symbols
     @IBOutlet weak var entryPicker1: UIPickerView!
-    //Three digits for pounds
+    //Three digits for pounds (or equivalent)
     @IBOutlet weak var entryPicker2: UIPickerView!
     @IBOutlet weak var entryPicker3: UIPickerView!
     @IBOutlet weak var entryPicker4: UIPickerView!
     //Currently this shows a colon
     @IBOutlet weak var entryPicker5: UIPickerView!
-    //Pence entry
+    //Pence entry (or equivalent
     @IBOutlet weak var entryPicker6: UIPickerView!
     @IBOutlet weak var entryPicker7: UIPickerView!
     //Add spend button
-    //@IBOutlet weak var addButton: UIButton!
-    //Table view of daily spend
     @IBOutlet weak var addButton: UIButton!
+    //Undo button
     @IBOutlet weak var undoButton: UIButton!
+    //Table view of daily spend
     @IBOutlet weak var historyTableView: UITableView!
-    
+    //For rxswift
     let disposeBag = DisposeBag()
     //Handles Core Data operations
     let spendStore = SpendStore()
@@ -44,25 +45,19 @@ class CombinedViewController: UIViewController {
  
     override func viewDidLoad() {
         super.viewDidLoad()
-
         let currencySymbol = NumberFormatter().currencySymbol ?? "$"
         let grayColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0.8)
         let yellowColor = UIColor(red: 1, green: 0.7, blue: 0, alpha: 1)
         undoButton.layer.cornerRadius = 5
         addButton.layer.cornerRadius = 5
         setupPickerViews(currencySymbol: currencySymbol)
-        
-        //TODO: comment
+        //Undo button removes last entry if there is one
         undoButton.rx.tap.bind(to: spendStore.undoInput).disposed(by: disposeBag)
         //Highlight button on tap
         undoButton.rx.tap.map{_ in return grayColor}.bind(to: undoButton.rx.backgroundColor).disposed(by: disposeBag)
-        
         //Remove highlight after delay
         undoButton.rx.tap.delay(.milliseconds(300), scheduler: MainScheduler.instance).map{_ in return yellowColor}.bind(to: undoButton.rx.backgroundColor).disposed(by: disposeBag)
-        
-        
-        
-        //On button tap calculate the amount spent and send this information to spendStore
+        //On add button tap calculate the amount spent and send this information to spendStore
         addButton.rx.tap.map { [weak self] _ -> SpendDateAndValue in
             let unitsCombined = SpendIntType(self?.entryPicker2.selectedRow(inComponent: 0) ?? 0) * 100 +
                 SpendIntType(self?.entryPicker3.selectedRow(inComponent: 0) ?? 0) * 10 +
@@ -70,15 +65,15 @@ class CombinedViewController: UIViewController {
             let subUnitsCombined = SpendIntType(self?.entryPicker6.selectedRow(inComponent: 0) ?? 0) * 10 +
                 SpendIntType(self?.entryPicker7.selectedRow(inComponent: 0) ?? 0)
             return SpendDateAndValue(date: Date(), units: unitsCombined, subUnits: subUnitsCombined)
-            }.filter{$0.units > 0 || $0.subUnits > 0}
+            }
+            //We don't want to send nil data
+            .filter{$0.units > 0 || $0.subUnits > 0}
+            //Send to spend store input
             .bind(to: spendStore.newSpendInput).disposed(by: disposeBag)
-        
-        //Highlight button on tap
+        //Highlight add button on tap
         addButton.rx.tap.map{_ in return grayColor}.bind(to: addButton.rx.backgroundColor).disposed(by: disposeBag)
-  
-        //Remove highlight after delay
+        //Remove add button highlight after delay
         addButton.rx.tap.delay(.milliseconds(300), scheduler: MainScheduler.instance).map{_ in return yellowColor}.bind(to: addButton.rx.backgroundColor).disposed(by: disposeBag)
-        
         //Clear picker on button tap
         addButton.rx.tap.subscribe(onNext:{[weak self] _ in
             self?.entryPicker2.selectRow(0, inComponent: 0, animated: true)
@@ -87,10 +82,8 @@ class CombinedViewController: UIViewController {
             self?.entryPicker6.selectRow(0, inComponent: 0, animated: true)
             self?.entryPicker7.selectRow(0, inComponent: 0, animated: true)
         }).disposed(by: disposeBag)
-        
         //When spendStore sends an update of it's stored data
         //Send this to the tableview
-        
         spendStore.spendOutput.map { spendDateAndValueArray  in
             return TableUtils.getTotalByDayForTableView(spendDateAndValueArray: spendDateAndValueArray )
             }
@@ -110,7 +103,6 @@ class CombinedViewController: UIViewController {
     }
     
     func setupPickerViews(currencySymbol : String) {
-        
         let pickerInput = ["0","1","2","3","4","5","6","7","8","9"]
         Observable.just([[currencySymbol]])
             .bind(to: entryPicker1.rx.items(adapter: PickerViewViewAdapter()))
@@ -135,6 +127,7 @@ class CombinedViewController: UIViewController {
         Observable.just([pickerInput])
             .bind(to: entryPicker7.rx.items(adapter: PickerViewViewAdapter()))
             .disposed(by: disposeBag)
+        //We needs to be able to identify picker in picker view
         entryPicker1.tag = 1
         entryPicker2.tag = 2
         entryPicker3.tag = 3

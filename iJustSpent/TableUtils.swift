@@ -3,7 +3,7 @@
 import Foundation
 import os.log
 
-//Static funnction to prepare table data
+//Static functions to prepare table data
 class TableUtils {
     struct DayHistoryTableInput {
         var date : String

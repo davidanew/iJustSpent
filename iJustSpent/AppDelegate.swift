@@ -18,6 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     @objc func significantTimeChangeNotification() {
         //Posted when there is a significant change in time, for example, change to a new day (midnight), carrier time update, and change to or from daylight savings time.
+        //In this situation we want to update the table view
         if let viewController = self.window?.rootViewController as? CombinedViewController {
             viewController.spendStore.send()
         }
