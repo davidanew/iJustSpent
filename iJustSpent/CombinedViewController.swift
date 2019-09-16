@@ -54,6 +54,13 @@ class CombinedViewController: UIViewController {
         
         //TODO: comment
         undoButton.rx.tap.bind(to: spendStore.undoInput).disposed(by: disposeBag)
+        //Highlight button on tap
+        undoButton.rx.tap.map{_ in return grayColor}.bind(to: undoButton.rx.backgroundColor).disposed(by: disposeBag)
+        
+        //Remove highlight after delay
+        undoButton.rx.tap.delay(.milliseconds(300), scheduler: MainScheduler.instance).map{_ in return yellowColor}.bind(to: undoButton.rx.backgroundColor).disposed(by: disposeBag)
+        
+        
         
         //On button tap calculate the amount spent and send this information to spendStore
         addButton.rx.tap.map { [weak self] _ -> SpendDateAndValue in
