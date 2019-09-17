@@ -5,10 +5,7 @@ import RxSwift
 import RxCocoa
 import os.log
 
-//TODO: Comments
-//TODO: const where possible
-//TODO: rethink undo button as notes.
-//TODO: Device size tests
+//TODO: Table view should scroll to top on add item - see todo further down
 //TODO: Memory leak/deinit tests
 //TODO: GUI tests
 //TODO: App icon and start screen
@@ -82,6 +79,9 @@ class CombinedViewController: UIViewController {
             self?.entryPicker6.selectRow(0, inComponent: 0, animated: true)
             self?.entryPicker7.selectRow(0, inComponent: 0, animated: true)
         }).disposed(by: disposeBag)
+        //scroll to top of tableview on tap
+        //TODO: I don't think reload is right , we need to scroll to the top
+        addButton.rx.tap.subscribe(onNext: {[weak self] _ in self?.historyTableView.reloadData()}).disposed(by: disposeBag)
         //When spendStore sends an update of it's stored data
         //Send this to the tableview
         spendStore.spendOutput.map { spendDateAndValueArray  in
