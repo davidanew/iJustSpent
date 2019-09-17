@@ -5,14 +5,14 @@ import RxSwift
 import RxCocoa
 import os.log
 
-//TODO: Table view should scroll to top on add item - see todo further down
-//TODO: Memory leak/deinit tests
-//TODO: GUI tests
+//TODO: GUI tests including diffrent devices/orientations
+//TODO: Try accessability
 //TODO: App icon and start screen
+//TODO: User tests
 //TODO: only release limited regions
 
 //Possible paid-for feature, detail table view spend removal
-
+//Max mem about 53.7 MB
 
 class CombinedViewController: UIViewController {
     //For spending value entry
@@ -38,6 +38,7 @@ class CombinedViewController: UIViewController {
     //Handles Core Data operations
     let spendStore = SpendStore()
     
+
     //Make the text in the title bar white
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
@@ -45,6 +46,9 @@ class CombinedViewController: UIViewController {
  
     override func viewDidLoad() {
         super.viewDidLoad()
+        historyTableView.accessibilityIdentifier = "tableView"
+        //historyTableView.accessibilityLabel = "tableView"
+
         let currencySymbol = NumberFormatter().currencySymbol ?? "$"
         let grayColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0.8)
         let yellowColor = UIColor(red: 1, green: 0.7, blue: 0, alpha: 1)
@@ -90,6 +94,7 @@ class CombinedViewController: UIViewController {
             return TableUtils.getTotalByDayForTableView(spendDateAndValueArray: spendDateAndValueArray )
             }
             .bind(to: historyTableView.rx.items(cellIdentifier: "CombinedCell", cellType: CombinedTableViewCell.self)) { row, model, cell in
+                cell.accessibilityIdentifier = "cell_\(row)"
                 cell.date.text = "\(model.date)"
                 cell.spending.text = "\(model.total)"
                 cell.layer.cornerRadius = 5

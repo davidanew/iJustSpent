@@ -36,21 +36,26 @@
                                             </pickerView>
                                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="048-wN-9bE">
                                                 <rect key="frame" x="61" y="0.0" width="52.5" height="216"/>
+                                                <accessibility key="accessibilityConfiguration" identifier="poundsHundreds"/>
                                             </pickerView>
                                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kyq-I1-OBd">
                                                 <rect key="frame" x="117.5" y="0.0" width="53" height="216"/>
+                                                <accessibility key="accessibilityConfiguration" identifier="poundsTens"/>
                                             </pickerView>
                                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xXf-SO-Cf2">
                                                 <rect key="frame" x="174.5" y="0.0" width="52.5" height="216"/>
+                                                <accessibility key="accessibilityConfiguration" identifier="poundsUnits"/>
                                             </pickerView>
                                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r4n-Nd-yn5">
                                                 <rect key="frame" x="231" y="0.0" width="26.5" height="216"/>
                                             </pickerView>
                                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="isb-Xf-iYt">
                                                 <rect key="frame" x="261.5" y="0.0" width="52.5" height="216"/>
+                                                <accessibility key="accessibilityConfiguration" identifier="penceTens"/>
                                             </pickerView>
                                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bqm-VV-NmX">
                                                 <rect key="frame" x="318" y="0.0" width="53" height="216"/>
+                                                <accessibility key="accessibilityConfiguration" identifier="penceUnits"/>
                                             </pickerView>
                                         </subviews>
                                         <constraints>
@@ -90,6 +95,9 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ekh-ld-3iZ" userLabel="Undo Button">
                                                 <rect key="frame" x="0.0" y="0.0" width="100" height="40"/>
                                                 <color key="backgroundColor" red="1" green="0.69803921568627447" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <accessibility key="accessibilityConfiguration" identifier="undoButton">
+                                                    <bool key="isElement" value="NO"/>
+                                                </accessibility>
                                                 <constraints>
                                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="b1a-RT-rIq"/>
                                                 </constraints>
@@ -101,6 +109,9 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aKD-op-gpU">
                                                 <rect key="frame" x="110" y="0.0" width="200" height="40"/>
                                                 <color key="backgroundColor" red="1" green="0.69803921568627447" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <accessibility key="accessibilityConfiguration" identifier="addSpendButton">
+                                                    <bool key="isElement" value="NO"/>
+                                                </accessibility>
                                                 <constraints>
                                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="LGL-Jv-0wS"/>
                                                 </constraints>
