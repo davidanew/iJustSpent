@@ -16,7 +16,7 @@ class iJustSpentUITests: XCTestCase {
         XCUIApplication().launch()
         // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
     }
-    
+    /*
     func testManualSetOnePicker(){
         let app = XCUIApplication()
         let poundsHundredsPicker = app.pickers["poundsHundreds"]
@@ -60,6 +60,7 @@ class iJustSpentUITests: XCTestCase {
         Thread.sleep(forTimeInterval: 5.0)
     }
     
+    */
     
     func addDataValue(inputTuple : (Int,Int,Int,Int,Int)){
         let app = XCUIApplication()
@@ -79,72 +80,32 @@ class iJustSpentUITests: XCTestCase {
     
     
     func clearData(){
-        
-        
-        
-        
-        //this will need to see if there is data in the table view, if so then delete
-        //repeat above until empty
         let app = XCUIApplication()
-        
-        //let poundsHundredsPicker = app.pickers["poundsHundreds"]
-        //poundsHundredsPicker.pickerWheels.element.adjust(toPickerWheelValue: "1")
-        //app.buttons["Add Spend"].tap()
-        //poundsHundredsPicker.pickerWheels.element.adjust(toPickerWheelValue: "1")
-        //app.buttons["Add Spend"].tap()
-        
-        
-        //Thread.sleep(forTimeInterval: 1.0)
-        
-        let myTable = app.tables.matching(identifier: "tableView")
-        //let myTable = app.table["table identifier"]
-        
-        print(myTable.cells.count)
-
-        while myTable.cells.count > 0 {
+        let table = app.tables.matching(identifier: "tableView")
+        print(table.cells.count)
+        while table.cells.count > 0 {
             app.buttons["Undo"].tap()
-            
-
         }
-        print(myTable.cells.count)
-        
-        
-        
-        //Thread.sleep(forTimeInterval: 5.0)
-
+        print(table.cells.count)
         //let cell = myTable.cells.element(matching: .cell, identifier: "myCell_0")
     }
     
+    /*
     func testManualAddDataAndClear(){
         addDataValue(inputTuple: (1,2,3,4,5))
         Thread.sleep(forTimeInterval: 1.0)
         clearData()
         Thread.sleep(forTimeInterval: 5.0)
-
     }
-    
-    
-    
-    
-
-
-
+    */
+    func testAutoAddOneItem(){
+        let app = XCUIApplication()
+        let table = app.tables.matching(identifier: "tableView")
+        clearData()
+        addDataValue(inputTuple: (5,4,3,2,1))
+        let topCell = table.cells.element(matching: .cell, identifier: "cell_0") //as? CombinedTableViewCell
+        XCTAssertTrue(topCell.staticTexts["Today"].exists)
+        XCTAssertTrue(topCell.staticTexts["$543:21"].exists)
+        clearData()
+    }
 }
-
-//func setTimePicker(time: TimePickerInput) {
-//    let app = XCUIApplication()
-//    let timeHours = app.pickers["timeHours"]
-//    let timeMinutes = app.pickers["timeMinutes"]
-//    let timeSeconds = app.pickers["timeSeconds"]
-//    timeHours.pickerWheels.element.adjust(toPickerWheelValue: String(time.hours))
-//    timeMinutes.pickerWheels.element.adjust(toPickerWheelValue: String(format: "%02d", time.minutes))
-//    timeSeconds.pickerWheels.element.adjust(toPickerWheelValue: String(format: "%02d", time.seconds))
-//}
-
-//func testAuto() {
-//    testInitAndError()
-//    testHelp() // not auto
-//    testPopulateFields() //not auto
-//    testCase()
-//    testExtremes()
-//}

@@ -42,7 +42,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "iJustSpent/CombinedViewController.swift"
-            timestampString = "590427846.531803"
+            timestampString = "590430399.8604209"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "52"
@@ -58,12 +58,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "iJustSpentUITests/iJustSpentUITests.swift"
-            timestampString = "590427846.531934"
+            timestampString = "590430399.860679"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "113"
-            endingLineNumber = "113"
-            landmarkName = "clearData()"
+            startingLineNumber = "108"
+            endingLineNumber = "108"
+            landmarkName = "testAutoAddOneItem()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
