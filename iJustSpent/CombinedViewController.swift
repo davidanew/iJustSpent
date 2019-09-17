@@ -11,6 +11,9 @@ import os.log
 //TODO: App icon and start screen
 //TODO: only release limited regions
 
+//Possible paid-for feature, detail table view spend removal
+
+
 class CombinedViewController: UIViewController {
     //For spending value entry
     //Displays the currency symbols
@@ -80,8 +83,7 @@ class CombinedViewController: UIViewController {
             self?.entryPicker7.selectRow(0, inComponent: 0, animated: true)
         }).disposed(by: disposeBag)
         //scroll to top of tableview on tap
-        //TODO: I don't think reload is right , we need to scroll to the top
-        addButton.rx.tap.subscribe(onNext: {[weak self] _ in self?.historyTableView.reloadData()}).disposed(by: disposeBag)
+        addButton.rx.tap.subscribe(onNext: {[weak self] _ in self?.historyTableView.scrollToRow(at:IndexPath(row: 0, section: 0) , at: .top, animated: true)}).disposed(by: disposeBag)
         //When spendStore sends an update of it's stored data
         //Send this to the tableview
         spendStore.spendOutput.map { spendDateAndValueArray  in
