@@ -5,8 +5,6 @@ import RxSwift
 import RxCocoa
 import os.log
 
-//TODO: tody up core data code and add 100 item limit
-//Maybe user dialog to remove >100
 //TODO: GUI tests
 //TODO: Try accessability
 //TODO: Try diffrent devices/orientationse
@@ -17,6 +15,7 @@ import os.log
 
 //Possible paid-for feature, detail table view spend removal
 //Max mem about 53.7 MB
+//Possible future - dialog box to indicate > 100 items deleted
 
 class CombinedViewController: UIViewController {
     //For spending value entry
