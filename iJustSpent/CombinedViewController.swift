@@ -5,8 +5,9 @@ import RxSwift
 import RxCocoa
 import os.log
 
-//TODO: GUI tests including diffrent devices/orientations
+//TODO: GUI tests including diffrent devices/orientationse
 //TODO: Try accessability
+//TODO: what is have over a year of data? can uninstall or have limit on number of items, or max one year. ITHINKMAX ENTRIES BEST, remove oldest 100 entries
 //TODO: App icon and start screen
 //TODO: User tests
 //TODO: only release limited regions
