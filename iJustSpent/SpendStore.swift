@@ -26,11 +26,29 @@ class SpendStore  {
     let newSpendInput = PublishSubject<SpendDateAndValue>()
     //For when undo button pressed (no data)
     let undoInput = PublishSubject<Void>()
+    
+    //TODO: how does weak self work here?
+    
+    func sendAllData(context : NSManagedObjectContext){
+        //Save of new item to core data has been done, now get all the data to send back
+        let request : NSFetchRequest<Spend> = Spend.fetchRequest()
+        guard let updatedSpendArray = try? context.fetch(request) else {
+            os_log("Context fetch error")
+            return
+        }
+        //Send the data via spendOutput
+        self.spendOutput.onNext(updatedSpendArray.map{ (spend : Spend) -> SpendDateAndValue in
+            return SpendDateAndValue(date: spend.date, units: spend.units, subUnits: spend.subUnits)
+        })
+        
+    }
+    
     //init maps subscriptions but does not send data
     init() {
         //When a new spend comes in we add this to the core data and send the new data back
         newSpendInput
         .subscribe(onNext : {[weak self] (newSpend : SpendDateAndValue) in
+            //let _self = self
             //Core data context
             let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
             //Construct new object to store the new spend
@@ -45,6 +63,8 @@ class SpendStore  {
                 os_log("New item context save error")
                 return
             }
+            self?.sendAllData(context: context)
+            /*
             //Save of new item to core data has been done, now get all the data to send back
             let request : NSFetchRequest<Spend> = Spend.fetchRequest()
             guard let updatedSpendArray = try? context.fetch(request) else {
@@ -55,6 +75,7 @@ class SpendStore  {
             self?.spendOutput.onNext(updatedSpendArray.map{ (spend : Spend) -> SpendDateAndValue in
                 return SpendDateAndValue(date: spend.date, units: spend.units, subUnits: spend.subUnits)
             })
+ */
         } ).disposed(by: disposeBag)
         
         undoInput
@@ -80,6 +101,7 @@ class SpendStore  {
                 os_log("New item context save error")
                 return
             }
+            /*
             //Save to core data has been done, now get all the data to send back
             //This is the same as in newSpendInput so could be a subroutine
             let request : NSFetchRequest<Spend> = Spend.fetchRequest()
@@ -90,13 +112,17 @@ class SpendStore  {
             self?.spendOutput.onNext(updatedSpendArray.map{ (spend : Spend) -> SpendDateAndValue in
                 return SpendDateAndValue(date: spend.date, units: spend.units, subUnits: spend.subUnits)
             })
+            */
+            self?.sendAllData(context: context)
+            
         } ).disposed(by: disposeBag)
     }
     //When Init has mapped the subcriptions, this is called to send new data
     //E.g on app initialisation or significant time change or when new data has been added
     func send() {
         //Core data setup
-        let thisContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        /*
         //This could be subroutine with the above code, maybe send in context?
         let request : NSFetchRequest<Spend> = Spend.fetchRequest()
         //Try and get the data to send
@@ -108,5 +134,8 @@ class SpendStore  {
         spendOutput.onNext(spendArray.map{ (spend : Spend) -> SpendDateAndValue in
             return SpendDateAndValue(date: spend.date, units: spend.units, subUnits: spend.subUnits)
         })
+        */
+        sendAllData(context: context)
+
     }
 }
