@@ -82,15 +82,21 @@ class iJustSpentUITests: XCTestCase {
     }
     
     
-    func clearData(){
+    func clearAllData(){
         let app = XCUIApplication()
         let table = app.tables.matching(identifier: "tableView")
-        print(table.cells.count)
+        //print(table.cells.count)
         while table.cells.count > 0 {
             app.buttons["Undo"].tap()
         }
-        print(table.cells.count)
+        //print(table.cells.count)
         //let cell = myTable.cells.element(matching: .cell, identifier: "myCell_0")
+    }
+    
+    func clearLatest(){
+        let app = XCUIApplication()
+        //let table = app.tables.matching(identifier: "tableView")
+        app.buttons["Undo"].tap()
     }
     
     /*
@@ -104,19 +110,19 @@ class iJustSpentUITests: XCTestCase {
     func testAutoAddOneItem(){
         let app = XCUIApplication()
         let table = app.tables.matching(identifier: "tableView")
-        clearData()
+        clearAllData()
         addDataValue(inputTuple: (5,4,3,2,1))
         let topCell = table.cells.element(matching: .cell, identifier: "cell_0") //as? CombinedTableViewCell
         XCTAssertTrue(topCell.staticTexts["Today"].exists)
         XCTAssertTrue(topCell.staticTexts["$543:21"].exists)
-        clearData()
+        clearAllData()
     }
     
-    func testJustWait(){
+    func testManualJustWait(){
         Thread.sleep(forTimeInterval: 5.0)
     }
     
-    func testUnitTestAddedItems(){
+    func testAutoUnitTestAddedItems(){
         let app = XCUIApplication()
         let table = app.tables.matching(identifier: "tableView")
         //TODO: Some loop to get identifiers?
@@ -132,7 +138,6 @@ class iJustSpentUITests: XCTestCase {
         let cell9 = table.cells.element(matching: .cell, identifier: "cell_9")
         let cell10 = table.cells.element(matching: .cell, identifier: "cell_10")
         let cell11 = table.cells.element(matching: .cell, identifier: "cell_11")
-
         XCTAssertTrue(cell0.staticTexts["Today"].exists); XCTAssertTrue(cell0.staticTexts["$5:95"].exists)
         XCTAssertTrue(cell1.staticTexts["Yesterday"].exists); XCTAssertTrue(cell1.staticTexts["$10:01"].exists)
         XCTAssertTrue(cell2.staticTexts["Sat 14 Sep"].exists); XCTAssertTrue(cell2.staticTexts["$999:23"].exists)
@@ -147,19 +152,28 @@ class iJustSpentUITests: XCTestCase {
         XCTAssertTrue(cell11.staticTexts["Wed 10 Mar"].exists); XCTAssertTrue(cell11.staticTexts["$123:64"].exists)
     }
     
-    //Sat 14 Sept 2019 $999:23
-    //Sat 25 May 2019 $23:92
-
-    //Thu 16 May 2019 $93:39
-    //Sat 30 Mar 2019  $56:19
-    //Fri 8 Feb 2019 $132:99
-    //Tue 1 Jan 2019 $163:01
-    //Fri 3 Feb 2017 $2:20
-    //Sat 1 Oct 2016 $0:02
-    //Sun 8 Dec 2013 $25:92
-    //Wed 10 Mar 2010 $123:64
-
-
+    func testAddMultipleItems(){
+        clearAllData()
+        let app = XCUIApplication()
+        let table = app.tables.matching(identifier: "tableView")
+        let cell0 = table.cells.element(matching: .cell, identifier: "cell_0")
+        for _ in 1...101 {
+            addDataValue(inputTuple: (0,0,0,0,1))
+        }
+        //the 101th value should be removed
+        XCTAssertTrue(cell0.staticTexts["Today"].exists); XCTAssertTrue(cell0.staticTexts["$1:00"].exists)
+    }
     
-    
-}
+    //production test
+    func testAuto(){
+        //unit test add funtion needs to be run first
+        let app = XCUIApplication()
+        let table = app.tables.matching(identifier: "tableView")
+        testAutoUnitTestAddedItems()
+        clearLatest()
+        let cell0 = table.cells.element(matching: .cell, identifier: "cell_0")
+        XCTAssertTrue(cell0.staticTexts["Yesterday"].exists); XCTAssertTrue(cell0.staticTexts["$10:01"].exists)
+        addDataValue(inputTuple: (0,0,5,9,5))
+        testAutoUnitTestAddedItems()
+    }
+ }
