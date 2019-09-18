@@ -9,61 +9,12 @@ import os.log
 import CoreData
 
 @testable import iJustSpent
-//@testable import iJustSpentTests
 
 class iJustSpentUITests: XCTestCase {
     override func setUp() {
         continueAfterFailure = false
         XCUIApplication().launch()
-        // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
-        //SpendStoreTests.testExample()
-        
     }
-    /*
-    func testManualSetOnePicker(){
-        let app = XCUIApplication()
-        let poundsHundredsPicker = app.pickers["poundsHundreds"]
-        poundsHundredsPicker.pickerWheels.element.adjust(toPickerWheelValue: "1")
-        Thread.sleep(forTimeInterval: 5.0)
-    }
-    
-    func testManualSetAllPickers(){
-        let app = XCUIApplication()
-        let poundsHundredsPicker = app.pickers["poundsHundreds"]
-        let poundsTensPicker = app.pickers["poundsTens"]
-        let poundsUnitsPicker = app.pickers["poundsUnits"]
-        let penceTensPicker = app.pickers["penceTens"]
-        let penceUnitsPicker = app.pickers["penceUnits"]
-
-        poundsHundredsPicker.pickerWheels.element.adjust(toPickerWheelValue: "9")
-        poundsTensPicker.pickerWheels.element.adjust(toPickerWheelValue: "9")
-        poundsUnitsPicker.pickerWheels.element.adjust(toPickerWheelValue: "9")
-        penceTensPicker.pickerWheels.element.adjust(toPickerWheelValue: "9")
-        penceUnitsPicker.pickerWheels.element.adjust(toPickerWheelValue: "9")
-
-        Thread.sleep(forTimeInterval: 5.0)
-    }
-    
-    func testManualAddValue(){
-        let app = XCUIApplication()
-        let poundsHundredsPicker = app.pickers["poundsHundreds"]
-        let poundsTensPicker = app.pickers["poundsTens"]
-        let poundsUnitsPicker = app.pickers["poundsUnits"]
-        let penceTensPicker = app.pickers["penceTens"]
-        let penceUnitsPicker = app.pickers["penceUnits"]
-        //let addButton = app.buttons["addButton"]
-        
-        poundsHundredsPicker.pickerWheels.element.adjust(toPickerWheelValue: "9")
-        poundsTensPicker.pickerWheels.element.adjust(toPickerWheelValue: "9")
-        poundsUnitsPicker.pickerWheels.element.adjust(toPickerWheelValue: "9")
-        penceTensPicker.pickerWheels.element.adjust(toPickerWheelValue: "9")
-        penceUnitsPicker.pickerWheels.element.adjust(toPickerWheelValue: "9")
-        app.buttons["Add Spend"].tap()
-
-        Thread.sleep(forTimeInterval: 5.0)
-    }
-    
-    */
     
     func addDataValue(inputTuple : (Int,Int,Int,Int,Int)){
         let app = XCUIApplication()
@@ -78,35 +29,21 @@ class iJustSpentUITests: XCTestCase {
         penceTensPicker.pickerWheels.element.adjust(toPickerWheelValue: String(inputTuple.3))
         penceUnitsPicker.pickerWheels.element.adjust(toPickerWheelValue: String(inputTuple.4))
         app.buttons["Add Spend"].tap()
-
     }
-    
     
     func clearAllData(){
         let app = XCUIApplication()
         let table = app.tables.matching(identifier: "tableView")
-        //print(table.cells.count)
         while table.cells.count > 0 {
             app.buttons["Undo"].tap()
         }
-        //print(table.cells.count)
-        //let cell = myTable.cells.element(matching: .cell, identifier: "myCell_0")
     }
     
     func clearLatest(){
         let app = XCUIApplication()
-        //let table = app.tables.matching(identifier: "tableView")
         app.buttons["Undo"].tap()
     }
     
-    /*
-    func testManualAddDataAndClear(){
-        addDataValue(inputTuple: (1,2,3,4,5))
-        Thread.sleep(forTimeInterval: 1.0)
-        clearData()
-        Thread.sleep(forTimeInterval: 5.0)
-    }
-    */
     func testAutoAddOneItem(){
         let app = XCUIApplication()
         let table = app.tables.matching(identifier: "tableView")
