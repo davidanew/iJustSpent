@@ -104,7 +104,7 @@ class SpendStore  {
     func limitEntries(context : NSManagedObjectContext){
         let request : NSFetchRequest<Spend> = Spend.fetchRequest()
         if let count = try? context.count(for: request){
-            print(count)
+            //print(count)
             //if more than 100 enties we want to delete the oldest
             if count > 100 {
                 let requestLatest : NSFetchRequest<Spend> = Spend.fetchRequest()
