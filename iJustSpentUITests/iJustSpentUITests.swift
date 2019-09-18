@@ -114,5 +114,6 @@ class iJustSpentUITests: XCTestCase {
         XCTAssertTrue(cell0.staticTexts["Yesterday"].exists); XCTAssertTrue(cell0.staticTexts["$10:01"].exists)
         addDataValue(inputTuple: (0,0,5,9,5))
         testAutoUnitTestAddedItems()
+        testAddMultipleItems()
     }
  }
