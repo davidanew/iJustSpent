@@ -157,11 +157,13 @@ class iJustSpentUITests: XCTestCase {
         let app = XCUIApplication()
         let table = app.tables.matching(identifier: "tableView")
         let cell0 = table.cells.element(matching: .cell, identifier: "cell_0")
-        for _ in 1...101 {
+        for _ in 1...100 {
             addDataValue(inputTuple: (0,0,0,0,1))
         }
+        addDataValue(inputTuple: (0,0,1,0,0))
         //the 101th value should be removed
-        XCTAssertTrue(cell0.staticTexts["Today"].exists); XCTAssertTrue(cell0.staticTexts["$1:00"].exists)
+        XCTAssertTrue(cell0.staticTexts["Today"].exists); XCTAssertTrue(cell0.staticTexts["$1:99"].exists)
+        Thread.sleep(forTimeInterval: 1.0)
     }
     
     //production test
