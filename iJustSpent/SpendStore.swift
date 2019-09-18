@@ -26,29 +26,11 @@ class SpendStore  {
     let newSpendInput = PublishSubject<SpendDateAndValue>()
     //For when undo button pressed (no data)
     let undoInput = PublishSubject<Void>()
-    
-    //TODO: how does weak self work here?
-    
-    func sendAllData(context : NSManagedObjectContext){
-        //Save of new item to core data has been done, now get all the data to send back
-        let request : NSFetchRequest<Spend> = Spend.fetchRequest()
-        guard let updatedSpendArray = try? context.fetch(request) else {
-            os_log("Context fetch error")
-            return
-        }
-        //Send the data via spendOutput
-        self.spendOutput.onNext(updatedSpendArray.map{ (spend : Spend) -> SpendDateAndValue in
-            return SpendDateAndValue(date: spend.date, units: spend.units, subUnits: spend.subUnits)
-        })
-        
-    }
-    
     //init maps subscriptions but does not send data
     init() {
         //When a new spend comes in we add this to the core data and send the new data back
         newSpendInput
         .subscribe(onNext : {[weak self] (newSpend : SpendDateAndValue) in
-            //let _self = self
             //Core data context
             let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
             //Construct new object to store the new spend
@@ -63,19 +45,10 @@ class SpendStore  {
                 os_log("New item context save error")
                 return
             }
+            //Remove old entries if we reach a certain limit
+            self?.limitEntries(context: context)
+            //Send all core data via spendOutput
             self?.sendAllData(context: context)
-            /*
-            //Save of new item to core data has been done, now get all the data to send back
-            let request : NSFetchRequest<Spend> = Spend.fetchRequest()
-            guard let updatedSpendArray = try? context.fetch(request) else {
-                os_log("Context fetch error")
-                return
-            }
-            //Send the data via spendOutput
-            self?.spendOutput.onNext(updatedSpendArray.map{ (spend : Spend) -> SpendDateAndValue in
-                return SpendDateAndValue(date: spend.date, units: spend.units, subUnits: spend.subUnits)
-            })
- */
         } ).disposed(by: disposeBag)
         
         undoInput
@@ -101,20 +74,7 @@ class SpendStore  {
                 os_log("New item context save error")
                 return
             }
-            /*
-            //Save to core data has been done, now get all the data to send back
-            //This is the same as in newSpendInput so could be a subroutine
-            let request : NSFetchRequest<Spend> = Spend.fetchRequest()
-            guard let updatedSpendArray = try? context.fetch(request) else {
-                os_log("Context fetch error")
-                return
-            }
-            self?.spendOutput.onNext(updatedSpendArray.map{ (spend : Spend) -> SpendDateAndValue in
-                return SpendDateAndValue(date: spend.date, units: spend.units, subUnits: spend.subUnits)
-            })
-            */
             self?.sendAllData(context: context)
-            
         } ).disposed(by: disposeBag)
     }
     //When Init has mapped the subcriptions, this is called to send new data
@@ -122,20 +82,45 @@ class SpendStore  {
     func send() {
         //Core data setup
         let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-        /*
-        //This could be subroutine with the above code, maybe send in context?
+        sendAllData(context: context)
+
+    }
+    
+    func sendAllData(context : NSManagedObjectContext){
+        //Get all the data to send back
         let request : NSFetchRequest<Spend> = Spend.fetchRequest()
-        //Try and get the data to send
-        guard let spendArray = try? thisContext.fetch(request) else {
-            os_log(" context fetch error")
+        guard let updatedSpendArray = try? context.fetch(request) else {
+            os_log("Context fetch error")
             return
         }
         //Send the data via spendOutput
-        spendOutput.onNext(spendArray.map{ (spend : Spend) -> SpendDateAndValue in
+        self.spendOutput.onNext(updatedSpendArray.map{ (spend : Spend) -> SpendDateAndValue in
             return SpendDateAndValue(date: spend.date, units: spend.units, subUnits: spend.subUnits)
         })
-        */
-        sendAllData(context: context)
-
+        
+    }
+    
+    //This function removes the oldest data if the entry count goes above 100
+    func limitEntries(context : NSManagedObjectContext){
+        let request : NSFetchRequest<Spend> = Spend.fetchRequest()
+        if let count = try? context.count(for: request){
+            print(count)
+            //if more than 100 enties we want to delete the oldest
+            if count > 100 {
+                let requestLatest : NSFetchRequest<Spend> = Spend.fetchRequest()
+                //Gets last entry
+                requestLatest.sortDescriptors = [NSSortDescriptor(key: "date", ascending: true)]
+                requestLatest.fetchLimit = 1
+                //Try and get item
+                guard let latestItem = try? context.fetch(requestLatest) else {
+                    return //this is not an error as list may be empty
+                }
+                //Delete object
+                for object in latestItem {
+                    context.delete(object)
+                }
+                
+            }
+        }
     }
 }
