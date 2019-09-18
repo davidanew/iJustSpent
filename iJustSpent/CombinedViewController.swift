@@ -5,13 +5,10 @@ import RxSwift
 import RxCocoa
 import os.log
 
-//TODO: GUI tests
 //TODO: Try accessability
-//TODO: Try diffrent devices/orientationse
-//TODO: what is have over a year of data? can uninstall or have limit on number of items, or max one year. ITHINKMAX ENTRIES BEST, remove oldest 100 entries
 //TODO: App icon and start screen
 //TODO: User tests
-//TODO: only release limited regions
+//TODO: Only release limited regions
 
 //Possible paid-for feature, detail table view spend removal
 //Max mem about 53.7 MB
