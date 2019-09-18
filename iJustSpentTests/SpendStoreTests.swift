@@ -105,26 +105,26 @@ class SpendStoreTests: XCTestCase {
         //print(someDateTime)
         addOneItem(newSpend: SpendDateAndValue(date: formatter.date(from: "2016/10/1 01:59"), units: 0, subUnits: 01))
         addOneItem(newSpend: SpendDateAndValue(date: formatter.date(from: "2016/10/1 01:10"), units: 0, subUnits: 02))
-        //Sat 1 Oct $0:02
+        //Sat 1 Oct 2016 $0:03
         addOneItem(newSpend: SpendDateAndValue(date: formatter.date(from: "2017/2/3 09:03"), units: 1, subUnits: 10))
         addOneItem(newSpend: SpendDateAndValue(date: formatter.date(from: "2017/2/3 09:04"), units: 1, subUnits: 10))
-        //Fri 3 Feb $1:10
+        //Fri 3 Feb 2017 $2:20
         addOneItem(newSpend: SpendDateAndValue(date: formatter.date(from: "2013/12/8 12:27"), units: 25, subUnits: 92))
-        //Sun 8 Dec $25:92
+        //Sun 8 Dec 2013 $25:92
         addOneItem(newSpend: SpendDateAndValue(date: formatter.date(from: "2010/3/10 13:23"), units: 123, subUnits: 64))
-        //Wed 10 Mar $123:64
+        //Wed 10 Mar 2010 $123:64
         addOneItem(newSpend: SpendDateAndValue(date: formatter.date(from: "2019/5/16 14:56"), units: 93, subUnits: 39))
-        //Thu 16 May $93:39
-        addOneItem(newSpend: SpendDateAndValue(date: formatter.date(from: "2019/9/21 15:31"), units: 999, subUnits: 23))
-        //Sat 21 Sept $999:23
+        //Thu 16 May 2019 $93:39
+        addOneItem(newSpend: SpendDateAndValue(date: formatter.date(from: "2019/9/14 15:31"), units: 999, subUnits: 23))
+        //Sat 14 Sept 2019 $999:23
         addOneItem(newSpend: SpendDateAndValue(date: formatter.date(from: "2019/5/25 23:32"), units: 23, subUnits: 92))
-        //Sat 25 May $23:92
+        //Sat 25 May 2019 $23:92
         addOneItem(newSpend: SpendDateAndValue(date: formatter.date(from: "2019/3/30 05:23"), units: 56, subUnits: 19))
-        //Sat 30 Mar $56:19
+        //Sat 30 Mar 2019  $56:19
         addOneItem(newSpend: SpendDateAndValue(date: formatter.date(from: "2019/2/08 05:10"), units: 132, subUnits: 99))
-        //Fri 8 Feb $132:99
+        //Fri 8 Feb 2019 $132:99
         addOneItem(newSpend: SpendDateAndValue(date: formatter.date(from: "2019/1/1 12:01"), units: 163, subUnits: 01))
-        //Tue 1 Jan $163:01
+        //Tue 1 Jan 2019 $163:01
 
         Thread.sleep(forTimeInterval: 5.0)
 

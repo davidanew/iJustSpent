@@ -120,45 +120,46 @@ class iJustSpentUITests: XCTestCase {
         let app = XCUIApplication()
         let table = app.tables.matching(identifier: "tableView")
         //TODO: Some loop to get identifiers?
-        let topCell = table.cells.element(matching: .cell, identifier: "cell_0") //as? CombinedTableViewCell
-        XCTAssertTrue(topCell.staticTexts["Today"].exists); XCTAssertTrue(topCell.staticTexts["$5:95"].exists)
-        XCTAssertTrue(topCell.staticTexts["Yesterday"].exists); XCTAssertTrue(topCell.staticTexts["$10:01"].exists)
-        XCTAssertTrue(topCell.staticTexts["Sat 1 Oct"].exists); XCTAssertTrue(topCell.staticTexts["$0:02"].exists)
-        XCTAssertTrue(topCell.staticTexts["Fri 3 Feb"].exists); XCTAssertTrue(topCell.staticTexts["$1:10"].exists)
-        XCTAssertTrue(topCell.staticTexts["Sun 8 Dec"].exists); XCTAssertTrue(topCell.staticTexts["$25:92"].exists)
-        XCTAssertTrue(topCell.staticTexts["Wed 10 Mar"].exists); XCTAssertTrue(topCell.staticTexts["$123:64"].exists)
-        XCTAssertTrue(topCell.staticTexts["Thu 16 May"].exists); XCTAssertTrue(topCell.staticTexts["$93:39"].exists)
-        XCTAssertTrue(topCell.staticTexts["Sat 21 Sep"].exists); XCTAssertTrue(topCell.staticTexts["$999:23"].exists)
-        XCTAssertTrue(topCell.staticTexts["Sat 25 May"].exists); XCTAssertTrue(topCell.staticTexts["$23:92"].exists)
-        XCTAssertTrue(topCell.staticTexts["Sat 30 Mar"].exists); XCTAssertTrue(topCell.staticTexts["$56:19"].exists)
-        XCTAssertTrue(topCell.staticTexts["Fri 8 Feb"].exists); XCTAssertTrue(topCell.staticTexts["$132:99"].exists)
-        XCTAssertTrue(topCell.staticTexts["Tue 1 Jan"].exists); XCTAssertTrue(topCell.staticTexts["$163:01"].exists)
+        let cell0 = table.cells.element(matching: .cell, identifier: "cell_0")
+        let cell1 = table.cells.element(matching: .cell, identifier: "cell_1")
+        let cell2 = table.cells.element(matching: .cell, identifier: "cell_2")
+        let cell3 = table.cells.element(matching: .cell, identifier: "cell_3")
+        let cell4 = table.cells.element(matching: .cell, identifier: "cell_4")
+        let cell5 = table.cells.element(matching: .cell, identifier: "cell_5")
+        let cell6 = table.cells.element(matching: .cell, identifier: "cell_6")
+        let cell7 = table.cells.element(matching: .cell, identifier: "cell_7")
+        let cell8 = table.cells.element(matching: .cell, identifier: "cell_8")
+        let cell9 = table.cells.element(matching: .cell, identifier: "cell_9")
+        let cell10 = table.cells.element(matching: .cell, identifier: "cell_10")
+        let cell11 = table.cells.element(matching: .cell, identifier: "cell_11")
+
+        XCTAssertTrue(cell0.staticTexts["Today"].exists); XCTAssertTrue(cell0.staticTexts["$5:95"].exists)
+        XCTAssertTrue(cell1.staticTexts["Yesterday"].exists); XCTAssertTrue(cell1.staticTexts["$10:01"].exists)
+        XCTAssertTrue(cell2.staticTexts["Sat 14 Sep"].exists); XCTAssertTrue(cell2.staticTexts["$999:23"].exists)
+        XCTAssertTrue(cell3.staticTexts["Sat 25 May"].exists); XCTAssertTrue(cell3.staticTexts["$23:92"].exists)
+        XCTAssertTrue(cell4.staticTexts["Thu 16 May"].exists); XCTAssertTrue(cell4.staticTexts["$93:39"].exists)
+        XCTAssertTrue(cell5.staticTexts["Sat 30 Mar"].exists); XCTAssertTrue(cell5.staticTexts["$56:19"].exists)
+        XCTAssertTrue(cell6.staticTexts["Fri 8 Feb"].exists); XCTAssertTrue(cell6.staticTexts["$132:99"].exists)
+        XCTAssertTrue(cell7.staticTexts["Tue 1 Jan"].exists); XCTAssertTrue(cell7.staticTexts["$163:01"].exists)
+        XCTAssertTrue(cell8.staticTexts["Fri 3 Feb"].exists); XCTAssertTrue(cell8.staticTexts["$2:20"].exists)
+        XCTAssertTrue(cell9.staticTexts["Sat 1 Oct"].exists); XCTAssertTrue(cell9.staticTexts["$0:03"].exists)
+        XCTAssertTrue(cell10.staticTexts["Sun 8 Dec"].exists); XCTAssertTrue(cell10.staticTexts["$25:92"].exists)
+        XCTAssertTrue(cell11.staticTexts["Wed 10 Mar"].exists); XCTAssertTrue(cell11.staticTexts["$123:64"].exists)
     }
     
-    //Sat 1 Oct $0:02
-    //Fri 3 Feb $1:10
-    //Sun 8 Dec $25:92
-    //Wed 10 Mar $123:64
-    //Thu 16 May $93:39
-    //Sat 21 Sept $999:23
-    //Sat 25 May $23:92
-    //Sat 30 Mar $56:19
-    //Fri 8 Feb $132:99
-    //Tue 1 Jan $163:01
+    //Sat 14 Sept 2019 $999:23
+    //Sat 25 May 2019 $23:92
+
+    //Thu 16 May 2019 $93:39
+    //Sat 30 Mar 2019  $56:19
+    //Fri 8 Feb 2019 $132:99
+    //Tue 1 Jan 2019 $163:01
+    //Fri 3 Feb 2017 $2:20
+    //Sat 1 Oct 2016 $0:02
+    //Sun 8 Dec 2013 $25:92
+    //Wed 10 Mar 2010 $123:64
+
 
     
-    
-    //Saturday, 8 October 2016
-    //Saturday, 8 October 2016 $0:02
-    //Wednesday, 8 February 2017
-    //Wednesday, 8 February 2017 $1:10
-    //Sunday, 8 December 2013 $25:92
-    //Monday, 8 March 2010 $123:64
-    //Wednesday, 8 May 2019 $93:39
-    //Sunday, 8 September 2019 $999:23
-    //Wednesday, 8 May 2019 $23:92
-    //Friday, 8 March 2019 $56:19
-    //Friday, 8 February 2019 $132:99
-    //Tuesday, 8 January 2019 $163:01
     
 }
