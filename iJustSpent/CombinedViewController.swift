@@ -5,9 +5,8 @@ import RxSwift
 import RxCocoa
 import os.log
 
-//TODO: Try accessability
-//TODO: App icon and start screen
 //TODO: User tests
+//TODO: final todos
 //TODO: Only release limited regions
 
 //Possible paid-for feature, detail table view spend removal
