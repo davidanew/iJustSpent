@@ -16,6 +16,8 @@ class iJustSpentUITests: XCTestCase {
         XCUIApplication().launch()
     }
     
+    let currencyIdentifier : String = "£"
+    
     func addDataValue(inputTuple : (Int,Int,Int,Int,Int)){
         let app = XCUIApplication()
         let poundsHundredsPicker = app.pickers["poundsHundreds"]
@@ -75,18 +77,18 @@ class iJustSpentUITests: XCTestCase {
         let cell9 = table.cells.element(matching: .cell, identifier: "cell_9")
         let cell10 = table.cells.element(matching: .cell, identifier: "cell_10")
         let cell11 = table.cells.element(matching: .cell, identifier: "cell_11")
-        XCTAssertTrue(cell0.staticTexts["Today"].exists); XCTAssertTrue(cell0.staticTexts["$5:95"].exists)
-        XCTAssertTrue(cell1.staticTexts["Yesterday"].exists); XCTAssertTrue(cell1.staticTexts["$10:01"].exists)
-        XCTAssertTrue(cell2.staticTexts["Sat 14 Sep"].exists); XCTAssertTrue(cell2.staticTexts["$999:23"].exists)
-        XCTAssertTrue(cell3.staticTexts["Sat 25 May"].exists); XCTAssertTrue(cell3.staticTexts["$23:92"].exists)
-        XCTAssertTrue(cell4.staticTexts["Thu 16 May"].exists); XCTAssertTrue(cell4.staticTexts["$93:39"].exists)
-        XCTAssertTrue(cell5.staticTexts["Sat 30 Mar"].exists); XCTAssertTrue(cell5.staticTexts["$56:19"].exists)
-        XCTAssertTrue(cell6.staticTexts["Fri 8 Feb"].exists); XCTAssertTrue(cell6.staticTexts["$132:99"].exists)
-        XCTAssertTrue(cell7.staticTexts["Tue 1 Jan"].exists); XCTAssertTrue(cell7.staticTexts["$163:01"].exists)
-        XCTAssertTrue(cell8.staticTexts["Fri 3 Feb"].exists); XCTAssertTrue(cell8.staticTexts["$2:20"].exists)
-        XCTAssertTrue(cell9.staticTexts["Sat 1 Oct"].exists); XCTAssertTrue(cell9.staticTexts["$0:03"].exists)
-        XCTAssertTrue(cell10.staticTexts["Sun 8 Dec"].exists); XCTAssertTrue(cell10.staticTexts["$25:92"].exists)
-        XCTAssertTrue(cell11.staticTexts["Wed 10 Mar"].exists); XCTAssertTrue(cell11.staticTexts["$123:64"].exists)
+        XCTAssertTrue(cell0.staticTexts["Today"].exists); XCTAssertTrue(cell0.staticTexts["\(currencyIdentifier)5:95"].exists)
+        XCTAssertTrue(cell1.staticTexts["Yesterday"].exists); XCTAssertTrue(cell1.staticTexts["\(currencyIdentifier)10:01"].exists)
+        XCTAssertTrue(cell2.staticTexts["Sat 14 Sep"].exists); XCTAssertTrue(cell2.staticTexts["\(currencyIdentifier)999:23"].exists)
+        XCTAssertTrue(cell3.staticTexts["Sat 25 May"].exists); XCTAssertTrue(cell3.staticTexts["\(currencyIdentifier)23:92"].exists)
+        XCTAssertTrue(cell4.staticTexts["Thu 16 May"].exists); XCTAssertTrue(cell4.staticTexts["\(currencyIdentifier)93:39"].exists)
+        XCTAssertTrue(cell5.staticTexts["Sat 30 Mar"].exists); XCTAssertTrue(cell5.staticTexts["\(currencyIdentifier)56:19"].exists)
+        XCTAssertTrue(cell6.staticTexts["Fri 8 Feb"].exists); XCTAssertTrue(cell6.staticTexts["\(currencyIdentifier)132:99"].exists)
+        XCTAssertTrue(cell7.staticTexts["Tue 1 Jan"].exists); XCTAssertTrue(cell7.staticTexts["\(currencyIdentifier)163:01"].exists)
+        XCTAssertTrue(cell8.staticTexts["Fri 3 Feb"].exists); XCTAssertTrue(cell8.staticTexts["\(currencyIdentifier)2:20"].exists)
+        XCTAssertTrue(cell9.staticTexts["Sat 1 Oct"].exists); XCTAssertTrue(cell9.staticTexts["\(currencyIdentifier)0:03"].exists)
+        XCTAssertTrue(cell10.staticTexts["Sun 8 Dec"].exists); XCTAssertTrue(cell10.staticTexts["\(currencyIdentifier)25:92"].exists)
+        XCTAssertTrue(cell11.staticTexts["Wed 10 Mar"].exists); XCTAssertTrue(cell11.staticTexts["\(currencyIdentifier)123:64"].exists)
     }
     
     func testAddMultipleItems(){
@@ -99,7 +101,7 @@ class iJustSpentUITests: XCTestCase {
         }
         addDataValue(inputTuple: (0,0,1,0,0))
         //the 101th value should be removed
-        XCTAssertTrue(cell0.staticTexts["Today"].exists); XCTAssertTrue(cell0.staticTexts["$1:99"].exists)
+        XCTAssertTrue(cell0.staticTexts["Today"].exists); XCTAssertTrue(cell0.staticTexts["\(currencyIdentifier)1:99"].exists)
         Thread.sleep(forTimeInterval: 1.0)
     }
     
@@ -111,7 +113,7 @@ class iJustSpentUITests: XCTestCase {
         testAutoUnitTestAddedItems()
         clearLatest()
         let cell0 = table.cells.element(matching: .cell, identifier: "cell_0")
-        XCTAssertTrue(cell0.staticTexts["Yesterday"].exists); XCTAssertTrue(cell0.staticTexts["$10:01"].exists)
+        XCTAssertTrue(cell0.staticTexts["Yesterday"].exists); XCTAssertTrue(cell0.staticTexts["\(currencyIdentifier)10:01"].exists)
         addDataValue(inputTuple: (0,0,5,9,5))
         testAutoUnitTestAddedItems()
         testAddMultipleItems()
