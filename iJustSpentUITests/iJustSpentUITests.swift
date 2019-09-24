@@ -47,13 +47,14 @@ class iJustSpentUITests: XCTestCase {
     }
     
     func testAutoAddOneItem(){
+        clearAllData()
         let app = XCUIApplication()
         let table = app.tables.matching(identifier: "tableView")
         clearAllData()
         addDataValue(inputTuple: (5,4,3,2,1))
         let topCell = table.cells.element(matching: .cell, identifier: "cell_0") //as? CombinedTableViewCell
         XCTAssertTrue(topCell.staticTexts["Today"].exists)
-        XCTAssertTrue(topCell.staticTexts["$543:21"].exists)
+        XCTAssertTrue(topCell.staticTexts["\(currencyIdentifier)543:21"].exists)
         clearAllData()
     }
     
@@ -105,7 +106,19 @@ class iJustSpentUITests: XCTestCase {
         Thread.sleep(forTimeInterval: 1.0)
     }
     
+    //on ios 10 the picker wheel setting doesn't work https://forums.developer.apple.com/message/63749#63749
+    //https://openradar.appspot.com/22918650
+    //https://stackoverflow.com/questions/50169079/swift-4-pickerwheel-adjust-unable-to-find-current-value-mai-4-in-possible-valu
+    func testPickerwheelDebug(){
+        let app = XCUIApplication()
+        let poundsHundredsPicker = app.pickers["poundsHundreds"]
+        poundsHundredsPicker.pickerWheels.element.tap()
+        poundsHundredsPicker.pickerWheels.element.adjust(toPickerWheelValue: "0")
+        Thread.sleep(forTimeInterval: 5.0)    
+    }
+    
     //production test
+    //does not work on ios 10
     func testAuto(){
         //unit test add funtion needs to be run first
         let app = XCUIApplication()

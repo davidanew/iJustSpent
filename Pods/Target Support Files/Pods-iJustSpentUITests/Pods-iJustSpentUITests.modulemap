@@ -1,4 +1,4 @@
-framework module Pods_iJustSpentUITests {
+module Pods_iJustSpentUITests {
   umbrella header "Pods-iJustSpentUITests-umbrella.h"
 
   export *

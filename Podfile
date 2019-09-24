@@ -1,5 +1,5 @@
 # Podfile
-use_frameworks!
+# use_frameworks!
 
 target 'iJustSpent' do
     platform :ios, '10.0'
