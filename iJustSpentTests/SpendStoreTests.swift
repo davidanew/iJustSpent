@@ -91,6 +91,16 @@ class SpendStoreTests: XCTestCase {
         addOneItem(newSpend: SpendDateAndValue(date: Date().addingTimeInterval(dayInSeconds * -10), units: 0, subUnits: 56))
     }
     
+    func testAddLimitDifferentDays(){
+        testClearUserData()
+
+        for index in 1...200 {
+
+            addOneItem(newSpend: SpendDateAndValue(date: Date().addingTimeInterval(dayInSeconds * Double(-1 * index)), units: 5, subUnits: 95))
+        }
+        
+    }
+    
     func testAddDataForUITest(){
         testClearUserData()
         //for today and yesterday
