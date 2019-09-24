@@ -76,8 +76,6 @@ class SpendStoreTests: XCTestCase {
     let dayInSeconds : TimeInterval = 60*60*24
     
     func testAddExampleData() {
-
-        
         addOneItem(newSpend: SpendDateAndValue(date: Date(), units: 5, subUnits: 95))
         addOneItem(newSpend: SpendDateAndValue(date: Date().addingTimeInterval(dayInSeconds * -1), units: 5, subUnits: 95))
         addOneItem(newSpend: SpendDateAndValue(date: Date().addingTimeInterval(dayInSeconds * -2), units: 6, subUnits: 23))
@@ -91,14 +89,40 @@ class SpendStoreTests: XCTestCase {
         addOneItem(newSpend: SpendDateAndValue(date: Date().addingTimeInterval(dayInSeconds * -10), units: 0, subUnits: 56))
     }
     
+    func testAddExampleDataScreenshot() {
+        testClearUserData()
+        addOneItem(newSpend: SpendDateAndValue(date: Date(), units: 5, subUnits: 95))
+        addOneItem(newSpend: SpendDateAndValue(date: Date().addingTimeInterval(dayInSeconds * -1), units: 32, subUnits: 95))
+        addOneItem(newSpend: SpendDateAndValue(date: Date().addingTimeInterval(dayInSeconds * -2), units: 43, subUnits: 23))
+        addOneItem(newSpend: SpendDateAndValue(date: Date().addingTimeInterval(dayInSeconds * -3), units: 23, subUnits: 64))
+        addOneItem(newSpend: SpendDateAndValue(date: Date().addingTimeInterval(dayInSeconds * -4), units: 45, subUnits: 10))
+        addOneItem(newSpend: SpendDateAndValue(date: Date().addingTimeInterval(dayInSeconds * -5), units: 6, subUnits: 48))
+        addOneItem(newSpend: SpendDateAndValue(date: Date().addingTimeInterval(dayInSeconds * -6), units: 5, subUnits: 95))
+        addOneItem(newSpend: SpendDateAndValue(date: Date().addingTimeInterval(dayInSeconds * -7), units: 19, subUnits: 96))
+        addOneItem(newSpend: SpendDateAndValue(date: Date().addingTimeInterval(dayInSeconds * -8), units: 23, subUnits: 45))
+        addOneItem(newSpend: SpendDateAndValue(date: Date().addingTimeInterval(dayInSeconds * -9), units: 20, subUnits: 98))
+        addOneItem(newSpend: SpendDateAndValue(date: Date().addingTimeInterval(dayInSeconds * -10), units: 0, subUnits: 56))
+        addOneItem(newSpend: SpendDateAndValue(date: Date().addingTimeInterval(dayInSeconds * -11), units: 32, subUnits: 95))
+        addOneItem(newSpend: SpendDateAndValue(date: Date().addingTimeInterval(dayInSeconds * -12), units: 43, subUnits: 23))
+        addOneItem(newSpend: SpendDateAndValue(date: Date().addingTimeInterval(dayInSeconds * -13), units: 23, subUnits: 64))
+        addOneItem(newSpend: SpendDateAndValue(date: Date().addingTimeInterval(dayInSeconds * -14), units: 45, subUnits: 10))
+        addOneItem(newSpend: SpendDateAndValue(date: Date().addingTimeInterval(dayInSeconds * -15), units: 6, subUnits: 48))
+        addOneItem(newSpend: SpendDateAndValue(date: Date().addingTimeInterval(dayInSeconds * -16), units: 5, subUnits: 95))
+        addOneItem(newSpend: SpendDateAndValue(date: Date().addingTimeInterval(dayInSeconds * -17), units: 19, subUnits: 96))
+        addOneItem(newSpend: SpendDateAndValue(date: Date().addingTimeInterval(dayInSeconds * -18), units: 23, subUnits: 45))
+        addOneItem(newSpend: SpendDateAndValue(date: Date().addingTimeInterval(dayInSeconds * -19), units: 20, subUnits: 98))
+        addOneItem(newSpend: SpendDateAndValue(date: Date().addingTimeInterval(dayInSeconds * -20), units: 0, subUnits: 56))
+    }
+    
+    
+    
+    
+    
     func testAddLimitDifferentDays(){
         testClearUserData()
-
         for index in 1...200 {
-
             addOneItem(newSpend: SpendDateAndValue(date: Date().addingTimeInterval(dayInSeconds * Double(-1 * index)), units: 5, subUnits: 95))
         }
-        
     }
     
     func testAddDataForUITest(){
