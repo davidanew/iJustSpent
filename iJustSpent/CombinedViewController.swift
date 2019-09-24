@@ -5,13 +5,13 @@ import RxSwift
 import RxCocoa
 import os.log
 
-//TODO: the warning
-//TODO: 100 entries and make sure it scrolls, check memory
-//TODO: final todos
+/*
+ Warning once only: UITableView was told to layout its visible cells and other contents without being in the view hierarchy (the table view or one of its superviews has not been added to a window). This may cause bugs by forcing views inside the table view to load and perform layout without accurate information (e.g. table view bounds, trait collection, layout margins, safe area insets, etc), and will also cause unnecessary performance overhead due to extra layout passes. Make a symbolic breakpoint at UITableViewAlertForLayoutOutsideViewHierarchy to catch this in the debugger and see what caused this to occur, so you can avoid this action altogether if possible, or defer it until the table view has been added to a window. Table view: <UITableView: 0x106027000; frame = (27.5 59.5; 320 297); clipsToBounds = YES; autoresize = RM+BM; gestureRecognizers = <NSArray: 0x283a3b810>; layer = <CALayer: 0x28346f860>; contentOffset: {0, 0}; contentSize: {320, 0}; adjustedContentInset: {0, 0, 0, 0}; dataSource: <RxCocoa.RxTableViewDataSourceProxy: 0x2810784e0>> */
+
 //TODO: Only release limited regions
 
 //Possible paid-for feature, detail table view spend removal
-//Max mem about 53.7 MB
+//Max mem about 19.4 MB
 //Possible future - dialog box to indicate > 100 items deleted
 
 class CombinedViewController: UIViewController {
@@ -46,9 +46,11 @@ class CombinedViewController: UIViewController {
  
     override func viewDidLoad() {
         super.viewDidLoad()
+        if #available(iOS 13.0, *) {
+            // Always adopt a light interface style.
+            overrideUserInterfaceStyle = .light
+        }
         historyTableView.accessibilityIdentifier = "tableView"
-        //historyTableView.accessibilityLabel = "tableView"
-
         let currencySymbol = NumberFormatter().currencySymbol ?? "$"
         let grayColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0.8)
         let yellowColor = UIColor(red: 1, green: 0.7, blue: 0, alpha: 1)
