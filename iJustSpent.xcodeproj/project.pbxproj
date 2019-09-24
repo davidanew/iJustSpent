@@ -328,24 +328,15 @@
 			files = (
 			);
 			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-iJustSpentTests/Pods-iJustSpentTests-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/RxCocoa-iOS12.2/RxCocoa.framework",
-				"${BUILT_PRODUCTS_DIR}/RxRelay-iOS12.2/RxRelay.framework",
-				"${BUILT_PRODUCTS_DIR}/RxSwift-iOS12.2/RxSwift.framework",
+				"${PODS_ROOT}/Target Support Files/Pods-iJustSpentTests/Pods-iJustSpentTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-			);
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxRelay.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
+				"${PODS_ROOT}/Target Support Files/Pods-iJustSpentTests/Pods-iJustSpentTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-iJustSpentTests/Pods-iJustSpentTests-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iJustSpentTests/Pods-iJustSpentTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		29E5BC9A2FF9D6478429F0F5 /* [CP] Check Pods Manifest.lock */ = {
@@ -398,24 +389,15 @@
 			files = (
 			);
 			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-iJustSpentUITests/Pods-iJustSpentUITests-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/RxCocoa-iOS12.2/RxCocoa.framework",
-				"${BUILT_PRODUCTS_DIR}/RxRelay-iOS12.2/RxRelay.framework",
-				"${BUILT_PRODUCTS_DIR}/RxSwift-iOS12.2/RxSwift.framework",
+				"${PODS_ROOT}/Target Support Files/Pods-iJustSpentUITests/Pods-iJustSpentUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-			);
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxRelay.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
+				"${PODS_ROOT}/Target Support Files/Pods-iJustSpentUITests/Pods-iJustSpentUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-iJustSpentUITests/Pods-iJustSpentUITests-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iJustSpentUITests/Pods-iJustSpentUITests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		CFEA96019BC3261CAF33580C /* [CP] Check Pods Manifest.lock */ = {
@@ -446,24 +428,15 @@
 			files = (
 			);
 			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-iJustSpent/Pods-iJustSpent-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/RxCocoa-iOS10.0/RxCocoa.framework",
-				"${BUILT_PRODUCTS_DIR}/RxRelay-iOS10.0/RxRelay.framework",
-				"${BUILT_PRODUCTS_DIR}/RxSwift-iOS10.0/RxSwift.framework",
+				"${PODS_ROOT}/Target Support Files/Pods-iJustSpent/Pods-iJustSpent-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-			);
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxRelay.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
+				"${PODS_ROOT}/Target Support Files/Pods-iJustSpent/Pods-iJustSpent-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-iJustSpent/Pods-iJustSpent-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iJustSpent/Pods-iJustSpent-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */

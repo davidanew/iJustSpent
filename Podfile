@@ -8,13 +8,13 @@ target 'iJustSpent' do
 end
 
 target 'iJustSpentTests' do
-    platform :ios, '12.2'
+    platform :ios, '10.0'
     pod 'RxSwift',    '~> 5'
     pod 'RxCocoa',    '~> 5'
 end
 
 target 'iJustSpentUITests' do
-    platform :ios, '12.2'
+    platform :ios, '10.0'
     pod 'RxSwift',    '~> 5'
     pod 'RxCocoa',    '~> 5'
 end
