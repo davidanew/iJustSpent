@@ -60,8 +60,6 @@ class TableUtils {
             else {
                 dateText = dateToText(key)
             }
-            //let defaults = UserDefaults.standard
-            //let currencySymbol = defaults.object(forKey:"currencySymbol") as? String ?? "$"
             let currencySymbol = NumberFormatter().currencySymbol ?? "$"
             totalByDay.append(DayHistoryTableInput(date: dateText, total: "\(currencySymbol)\(value.units):\(String(format: "%02d", value.subUnits ))"  ))
         }
