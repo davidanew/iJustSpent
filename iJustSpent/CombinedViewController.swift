@@ -5,7 +5,8 @@ import RxSwift
 import RxCocoa
 import os.log
 
-//TODO: User tests
+//TODO: the warning
+//TODO: 100 entries and make sure it scrolls, check memory
 //TODO: final todos
 //TODO: Only release limited regions
 
