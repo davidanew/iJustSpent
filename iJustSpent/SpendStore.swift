@@ -119,7 +119,6 @@ class SpendStore  {
                 for object in latestItem {
                     context.delete(object)
                 }
-                
             }
         }
     }
